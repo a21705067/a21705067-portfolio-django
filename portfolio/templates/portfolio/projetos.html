@@ -1,0 +1,29 @@
+{% extends 'portfolio/layout.html' %}
+{% load static %}
+{% block head %}
+<title>Projetos</title>
+<link rel="stylesheet" href="{% static 'css/projetos.css' %}">
+{% endblock %}
+
+{% block main %}
+  <main>
+    <h1>Projetos</h1>
+
+    <table class="tabela1ano">
+        <thead>
+            <tr class="header-tr">
+                <th>Área</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                {% for projeto in projetos %}
+              <td>{{ projeto.area }}</td>
+              <td>{{ projeto.descricao | safe }}</td>
+                {% endfor %}
+            </tr>
+        </tbody>
+    </table>
+  </main>
+{% endblock %}

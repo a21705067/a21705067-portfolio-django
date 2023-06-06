@@ -1,0 +1,298 @@
+html, body {
+  height: 100%;
+  color: white;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+nav {
+  position: relative;
+}
+
+nav ul,
+nav li,
+nav a {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+}
+
+nav ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: center; 
+  align-items: center;
+  position: relative;
+  background-color: #28282B;
+  box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+}
+
+nav ul li {
+  display: block;
+  position: relative;
+  background-color: #28282B;
+}
+
+/* Top-level menu links */
+nav ul li a {
+  display: block;
+  padding: 1em;
+  color: white;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s ease-out;
+}
+
+/* Change color on hover */
+nav ul li a:hover {
+  color: white;
+  background-color: darkgray;
+  content: "▸";
+}
+
+/* Sub-menu */
+nav ul ul {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #28282B;
+  box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+  white-space: nowrap;
+}
+
+nav ul li:hover > ul {
+  display: inherit;
+}
+
+nav ul ul li {
+  width: 100%;
+}
+
+nav ul ul li a {
+  display: block;
+  padding: 0.5em 1em;
+  color: white;
+  font-size: 1em;
+  text-decoration: none;
+}
+
+nav ul ul li a:hover {
+  color: #28282B;
+}
+
+nav ul ul ul {
+  left: 100%;
+  top: 0;
+}
+
+/* Arrows to indicate sub-menu */
+nav ul li > a:after {
+  content: "▾";
+}
+
+nav ul li > a:only-child:after {
+  content: "";
+}
+
+.footer {
+  position: relative;
+  background: #28282B;
+  min-height: 80px;
+  padding: 20px 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 25vh;
+}
+
+.social-icon,
+.menu {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+  flex-wrap: wrap;
+}
+
+.social-icon__item,
+.menu__item {
+  list-style: none;
+}
+
+.social-icon__link {
+  font-size: 2rem;
+  color: #fff;
+  margin: 0 10px;
+  display: inline-block;
+  transition: 0.5s;
+}
+.social-icon__link:hover {
+  transform: translateY(-10px);
+}
+
+.menu__link {
+  font-size: 1.2rem;
+  color: #fff;
+  margin: 0 10px;
+  display: inline-block;
+  transition: 0.5s;
+  text-decoration: none;
+  opacity: 0.75;
+  font-weight: 300;
+}
+
+.menu__link:hover {
+  opacity: 1;
+}
+
+.footer p {
+  color: #fff;
+  margin: 15px 0 10px 0;
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+.wave {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: url('../images/wave_black.png');
+  background-size: 1000px 100px;
+}
+
+.toggle {
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  width: 60px;
+  height: 30px;
+}
+
+.toggle-container {
+  display: flex;
+  align-items: center;
+}
+
+.toggle input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 30px;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  border-radius: 50%;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #ccc;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(30px);
+  -ms-transform: translateX(30px);
+  transform: translateX(30px);
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  font-size: 16px;
+}
+
+.sun {
+  left: 5px;
+}
+
+.moon {
+  right: 5px;
+}
+
+i {
+  color:black;
+}
+
+a i {
+  color: white;
+}
+
+article {
+  background-color: #28282B;
+  color: white;
+}
+
+div {
+  background-color: #28282B;
+  color: white;
+}
+
+.tabela1ano, .tabela2ano, .tabela3ano {
+  background-color: #28282B;
+  color: white;
+}
+
+form {
+  background-color: #28282B;
+  color: white;
+}
+
+.logotipo {
+  background-image: url('../images/logotipo_dark.jpg');
+  display: inline-block;
+  width: 70px;
+  height: 60px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  vertical-align: middle;
+}
+
+@media screen and (max-width: 600px){
+  img {
+    max-width: 25vh;
+    max-height: 25vh;
+  }
+
+  p {
+    font-size: 0.8em;
+  }
+
+  .footer {
+    margin-top: 90vh;
+  }
+
+}

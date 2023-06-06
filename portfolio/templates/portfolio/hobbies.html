@@ -1,0 +1,55 @@
+{% extends 'portfolio/layout.html' %}
+{% load static %}
+{% block head %}
+<title>Hobbies</title>
+<link rel="stylesheet" href="{% static 'css/hobbies.css' %}">
+{% endblock %}
+
+{% block main %}
+
+      <h1>Hobbies</h1>
+      <div class="container">
+        {% load static %}
+        <div class="section" style="background-image: url({% static 'images/gaming_setup.png' %});">
+          <h2>Gaming</h2>
+          <ul>
+              {% for game in listaGaming %}
+              <li>{{ game.descricao }}</li>
+              {% endfor %}
+          </ul>
+        </div>
+        <div class="section" style="background-image: url({% static 'images/bookshelf.png' %});">
+          <h2>Livros</h2>
+          <ul>
+              {% for livro in listaLivros %}
+              <li>{{ livro.descricao }}</li>
+              {% endfor %}
+          </ul>
+        </div>
+        <div class="section" style="background-image: url({% static 'images/musica.png' %});">
+          <h2>Música</h2>
+          <ul>
+            {% for musica in listaMusicas %}
+              <li>{{ musica.descricao }}</li>
+              {% endfor %}
+          </ul>
+        </div>
+        <div class="section" style="background-image: url({% static 'images/movies.png' %});">
+          <h2>Series / Filmes</h2>
+          <ul>
+            {% for tv in listaTV %}
+              <li>{{ tv.descricao }}</li>
+              {% endfor %}
+          </ul>
+        </div>
+        <div class="section" style="background-image: url({% static 'images/anime.png' %});">
+          <h2>Anime</h2>
+          <ul>
+            {% for anime in listaAnimes %}
+              <li>{{ anime.descricao }}</li>
+              {% endfor %}
+          </ul>
+        </div>
+      </div>
+
+{% endblock %}

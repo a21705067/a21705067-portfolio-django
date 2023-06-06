@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Tiago Guerra">
+    <meta name="description" content="O meu portfolio">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/geral-light.css' %}">
+    {% block head %}
+    {% endblock head %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/4e6cbf3d2b.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="{% url 'home' %}">Home</a></li>
+          <li><a>Sobre mim</a>
+            <ul>
+              <li><a href="{% url 'licenciatura' %}">Licenciatura</a></li>
+              <li><a href="{% url 'hobbies' %}">Interesses e hobbies</a></li>
+            </ul>
+          </li>
+{#          <li><a href="{% url 'projetos' %}">Projetos</a></li>#}
+{#          <li><a>Programação Web</a>#}
+{#            <ul>#}
+{#                <li><a>Tecnologias Existentes</a>#}
+{#                  <ul>#}
+{#                    <li><a href="{% url 'portfolio:frontend' %}">Front-end</a></li>#}
+{#                    <li><a href="{% url 'portfolio:backend' %}">Back-end</a></li>#}
+{#                  </ul>#}
+{#                </li>#}
+{#                <li><a>Laboratórios</a>#}
+{#                  <ul>#}
+{#                    <li><a href="{% url 'http://a21705067.pythonanywhere.com/' %}" target="_blank">Lab 1</a></li>#}
+{#                    <li><a href="{% url 'https://a21705067.pythonanywhere.com/a21705067-pw-lab2/' %}" target="_blank">Lab 2</a></li>#}
+{#                    <li><a href="{% url 'https://a21705067.pythonanywhere.com/a21705067-pw-lab3/' %}" target="_blank">Lab 3</a></li>#}
+{#                    <li><a href="{% url 'https://a21705067.pythonanywhere.com/a21705067-pw-lab4/' %}" target="_blank">Lab 4</a></li>#}
+{#                </ul>#}
+{#                </li>#}
+{#                <li><a href="{% url 'portfolio:playground' %}">Javascript Playground</a></li>#}
+{#            </ul>#}
+{#          </li>#}
+{#         <div class="toggle-container">#}
+{#          <label class="toggle">#}
+{#            <input type="checkbox" id="mode-toggle">#}
+{#            <span class="slider"></span>#}
+{#            <span class="icon sun"><i class="fas fa-sun"></i></span>#}
+{#            <span class="icon moon"><i class="fas fa-moon"></i></span>#}
+{#          </label>#}
+{#        </div>#}
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+        {% block main %}
+        {% endblock main %}
+    </main>
+
+    <footer class="footer">
+      <ul class="social-icon">
+        <li class="social-icon__item"><a class="social-icon__link" href="https://www.twitter.com" target="_blank">
+          <i class="fa-brands fa-twitter"></i>
+          </a></li>
+        <li class="social-icon__item"><a class="social-icon__link" href="https://www.linkedin.com/in/tiago-guerra-6b911815a/" target="_blank">
+          <i class="fa-brands fa-linkedin"></i>
+          </a></li>
+        <li class="social-icon__item"><a class="social-icon__link" href="https://www.instagram.com" target="_blank">
+          <i class="fa-brands fa-instagram"></i>
+          </a></li>
+        <li class="social-icon__item"><a class="social-icon__link" href="https://www.facebook.com" target="_blank">
+          <i class="fa-brands fa-facebook"></i>
+          </a></li>
+      </ul>
+      <ul class="menu">
+        <li class="menu__item"><a class="menu__link" href="{% url 'sitemap' %}">Mapa do Site</a></li>
+      </ul>
+
+      <p>&copy;2023 Tiago Guerra | Universidade Lusófona <span class="logotipo"></span></p>
+    </footer>
+  </body>
+{#  <script>#}
+{#    const modeSwitch = document.getElementById('mode-toggle');#}
+{#    {% load static %}#}
+{#    const linkElement = document.querySelector('link[href="{% static 'css/geral-light.css' %}"]');#}
+{##}
+{#    // Verifica se há escolha armazenada no localStorage#}
+{#    const mode = localStorage.getItem('mode');#}
+{#    if (mode === 'dark') {#}
+{#      linkElement.setAttribute('href', 'css/geral-dark.css');#}
+{#      modeSwitch.checked = true;#}
+{#    }#}
+{##}
+{#    modeSwitch.addEventListener('click', () => {#}
+{#      if (linkElement.getAttribute('href') === 'css/geral-light.css') {#}
+{#        linkElement.setAttribute('href', 'css/geral-dark.css');#}
+{#        localStorage.setItem('mode', 'dark');#}
+{#      } else {#}
+{#        linkElement.setAttribute('href', 'css/geral-light.css');#}
+{#        localStorage.setItem('mode', 'light');#}
+{#      }#}
+{#    });#}
+{##}
+{#    window.addEventListener('load', function() {#}
+{#      var labLinks = document.querySelectorAll('#laboratorios a');#}
+{#      for (var i = 0; i < labLinks.length; i++) {#}
+{#        labLinks[i].setAttribute('target', '_blank');#}
+{#      }#}
+{#    });#}
+{##}
+{#    window.addEventListener('load', function() {#}
+{#      var labLinks = document.querySelectorAll('#social-icon a');#}
+{#      for (var i = 0; i < labLinks.length; i++) {#}
+{#        labLinks[i].setAttribute('target', '_blank');#}
+{#      }#}
+{#    });#}
+{#  </script>#}
+</html>

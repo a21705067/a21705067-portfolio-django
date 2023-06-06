@@ -1,0 +1,24 @@
+{% extends 'portfolio/layout.html' %}
+{% load static %}
+{% block head %}
+<title>Home</title>
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block main %}
+    <p>Não deixes que os outros digam quais os teus limites</p>
+
+    <article class="primeiro">
+        <section class="personal-presentation">
+          <div class="personal-div">
+          <div class="personal-picture"></div>
+           <p>Olá, o meu nome é Tiago.<br>
+              Sou um aficionado por tecnologia e tento sempre obter novos conhecimentos nas mais diversas áreas para melhorar tanto a nível pessoal como profissional.<br>
+              Gamer nos tempos livres, devorador de séries e sempre pronto para uma sessão de convívio com os amigos. 😎</p>
+          </div>
+        </section>
+    </article>
+
+    <article class="segundo">
+    </article>
+{% endblock %}

@@ -1,0 +1,47 @@
+* {
+    padding: 0; 
+    margin: 0;
+}
+
+body {
+    /* como o menu ocupa 10vh, este tem 90vh para o vermo inteiro. */
+    background-image: url('../images/enterpreneur_art.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    text-align: center;
+}
+
+main {
+    height: 100vh;
+}
+ 
+h1 {
+    position: absolute;
+    top: 14vh;
+    width: 100%;
+}
+ 
+table {
+    display: inline-block;
+    width: 70%;
+    vertical-align: top;
+    margin-right: 2%;
+    margin-top: 15vh;
+    opacity: 0.9;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    text-align: center;
+}
+
+.header-tr {
+    font-weight: bold;
+}

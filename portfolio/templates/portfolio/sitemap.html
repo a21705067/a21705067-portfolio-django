@@ -1,0 +1,17 @@
+{% extends 'portfolio/layout.html' %}
+{% load static %}
+{% block head %}
+<title>Hobbies</title>
+<link rel="stylesheet" href="{% static 'css/sitemap.css' %}">
+{% endblock %}
+
+{% block main %}
+
+<article>
+    <section>
+        {% load static %}
+    <div id="svg" style="background-image:url({% static 'images/sitemap.svg' %})"></div>
+    </section>
+</article>
+
+{% endblock %}

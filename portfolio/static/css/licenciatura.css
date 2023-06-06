@@ -1,0 +1,48 @@
+* {
+    padding: 0; 
+    margin: 0;
+}
+
+body {
+    /* como o menu ocupa 10vh, este tem 90vh para o vermo inteiro. */
+    height: 100%;
+    background-image: url('../images/university_lecture_hall.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    text-align: center;
+}
+
+h1 {
+    position: absolute;
+    top: 8vh;
+    width: 100%;
+    color: white;
+}
+  
+
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+    /* color: white; */
+}
+
+.header-tr {
+    font-weight: bold;
+}
+
+.tabela1ano, .tabela2ano, .tabela3ano {
+    display: inline-block;
+    min-width: 100px;
+    vertical-align: top;
+    margin-right: 2%;
+    margin-top: 10vh;
+    opacity: 0.9;
+}
+  
+.tabela3ano {
+  margin-right: 0;
+}

@@ -1,0 +1,88 @@
+{% extends 'portfolio/layout.html' %}
+{% load static %}
+{% block head %}
+<title>Licenciatura</title>
+<link rel="stylesheet" href="{% static 'css/licenciatura.css' %}">
+{% endblock %}
+
+{% block main %}
+        <h1>Licenciatura Informática de Gestão</h1>
+
+        <table class="tabela1ano">
+            <thead>
+                <tr>
+                    <th colspan="4">
+                        1º Ano
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="header-tr">
+                    <td>Período</td>
+                    <td>Disciplina</td>
+                    <td>ECTS</td>
+                    <td>Estado</td>
+                </tr>
+                {% for cadeira in primeiroAno %}
+                <tr>
+                    <td>{{ cadeira.semestre }}º Semestre</td>
+                    <td>{{ cadeira.disciplina }}</td>
+                    <td>{{ cadeira.etcs }}</td>
+                    <td>{{ cadeira.estado }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <table class="tabela2ano">
+            <thead>
+                <tr>
+                    <th colspan="4">
+                        2º Ano
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="header-tr">
+                    <td>Período</td>
+                    <td>Disciplina</td>
+                    <td>ECTS</td>
+                    <td>Estado</td>
+                </tr>
+                {% for cadeira in segundoAno %}
+                <tr>
+                    <td>{{ cadeira.semestre }}º Semestre</td>
+                    <td>{{ cadeira.disciplina }}</td>
+                    <td>{{ cadeira.etcs }}</td>
+                    <td>{{ cadeira.estado }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <table class="tabela3ano">
+            <thead>
+                <tr>
+                    <th colspan="4">
+                        3º Ano
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="header-tr">
+                    <td>Período</td>
+                    <td>Disciplina</td>
+                    <td>ECTS</td>
+                    <td>Estado</td>
+                </tr>
+                {% for cadeira in terceiroAno %}
+                <tr>
+                    <td>{{ cadeira.semestre }}º Semestre</td>
+                    <td>{{ cadeira.disciplina }}</td>
+                    <td>{{ cadeira.etcs }}</td>
+                    <td>{{ cadeira.estado }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+{% endblock %}
