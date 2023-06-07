@@ -18,41 +18,49 @@
     <header>
       <nav>
         <ul>
-          <li><a href="{% url 'home' %}">Home</a></li>
+          <li><a href="{% url 'portfolio:home' %}">Home</a></li>
           <li><a>Sobre mim</a>
             <ul>
-              <li><a href="{% url 'licenciatura' %}">Licenciatura</a></li>
-              <li><a href="{% url 'hobbies' %}">Interesses e hobbies</a></li>
+              <li><a href="{% url 'portfolio:licenciatura' %}">Licenciatura</a></li>
+              <li><a href="{% url 'portfolio:hobbies' %}">Interesses e hobbies</a></li>
             </ul>
           </li>
-{#          <li><a href="{% url 'projetos' %}">Projetos</a></li>#}
-{#          <li><a>Programação Web</a>#}
-{#            <ul>#}
-{#                <li><a>Tecnologias Existentes</a>#}
-{#                  <ul>#}
-{#                    <li><a href="{% url 'portfolio:frontend' %}">Front-end</a></li>#}
-{#                    <li><a href="{% url 'portfolio:backend' %}">Back-end</a></li>#}
-{#                  </ul>#}
-{#                </li>#}
-{#                <li><a>Laboratórios</a>#}
-{#                  <ul>#}
-{#                    <li><a href="{% url 'http://a21705067.pythonanywhere.com/' %}" target="_blank">Lab 1</a></li>#}
-{#                    <li><a href="{% url 'https://a21705067.pythonanywhere.com/a21705067-pw-lab2/' %}" target="_blank">Lab 2</a></li>#}
-{#                    <li><a href="{% url 'https://a21705067.pythonanywhere.com/a21705067-pw-lab3/' %}" target="_blank">Lab 3</a></li>#}
-{#                    <li><a href="{% url 'https://a21705067.pythonanywhere.com/a21705067-pw-lab4/' %}" target="_blank">Lab 4</a></li>#}
-{#                </ul>#}
-{#                </li>#}
-{#                <li><a href="{% url 'portfolio:playground' %}">Javascript Playground</a></li>#}
-{#            </ul>#}
-{#          </li>#}
-{#         <div class="toggle-container">#}
-{#          <label class="toggle">#}
-{#            <input type="checkbox" id="mode-toggle">#}
-{#            <span class="slider"></span>#}
-{#            <span class="icon sun"><i class="fas fa-sun"></i></span>#}
-{#            <span class="icon moon"><i class="fas fa-moon"></i></span>#}
-{#          </label>#}
-{#        </div>#}
+          <li><a href="{% url 'portfolio:projetos' %}">Projetos</a></li>
+<!--{#          <li><a>Programação Web</a>#}-->
+<!--{#            <ul>#}-->
+<!--{#                <li><a>Tecnologias Existentes</a>#}-->
+<!--{#                  <ul>#}-->
+<!--{#                    <li><a href="{% url 'portfolio:frontend' %}">Front-end</a></li>#}-->
+<!--{#                    <li><a href="{% url 'portfolio:backend' %}">Back-end</a></li>#}-->
+<!--{#                  </ul>#}-->
+<!--{#                </li>#}-->
+<!--{#                <li><a>Laboratórios</a>#}-->
+<!--{#                  <ul>#}-->
+<!--{#                    <li><a href="{% url 'http://a21705067.pythonanywhere.com/' %}" target="_blank">Lab 1</a></li>#}-->
+<!--{#                    <li><a href="{% url 'https://a21705067.pythonanywhere.com/a21705067-pw-lab2/' %}" target="_blank">Lab 2</a></li>#}-->
+<!--{#                    <li><a href="{% url 'https://a21705067.pythonanywhere.com/a21705067-pw-lab3/' %}" target="_blank">Lab 3</a></li>#}-->
+<!--{#                    <li><a href="{% url 'https://a21705067.pythonanywhere.com/a21705067-pw-lab4/' %}" target="_blank">Lab 4</a></li>#}-->
+<!--{#                </ul>#}-->
+<!--{#                </li>#}-->
+<!--{#                <li><a href="{% url 'portfolio:playground' %}">Javascript Playground</a></li>#}-->
+<!--{#            </ul>#}-->
+<!--{#          </li>#}-->
+          <li>
+            {% if request.user.is_authenticated %}
+            user: {{request.user}}
+            <a href="{% url 'portfolio:logout' %}">Logout</a>
+            {% else %}
+            <a href="{% url 'portfolio:login' %}">Login</a>
+            {% endif %}
+          </li>
+<!--{#         <div class="toggle-container">#}-->
+<!--{#          <label class="toggle">#}-->
+<!--{#            <input type="checkbox" id="mode-toggle">#}-->
+<!--{#            <span class="slider"></span>#}-->
+<!--{#            <span class="icon sun"><i class="fas fa-sun"></i></span>#}-->
+<!--{#            <span class="icon moon"><i class="fas fa-moon"></i></span>#}-->
+<!--{#          </label>#}-->
+<!--{#        </div>#}-->
         </ul>
       </nav>
     </header>
@@ -78,7 +86,7 @@
           </a></li>
       </ul>
       <ul class="menu">
-        <li class="menu__item"><a class="menu__link" href="{% url 'sitemap' %}">Mapa do Site</a></li>
+        <li class="menu__item"><a class="menu__link" href="{% url 'portfolio:sitemap' %}">Mapa do Site</a></li>
       </ul>
 
       <p>&copy;2023 Tiago Guerra | Universidade Lusófona <span class="logotipo"></span></p>

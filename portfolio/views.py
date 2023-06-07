@@ -45,3 +45,27 @@ def projetos_page_view(request):
     projetos = Projeto.objects.all()
 
     return render(request, 'portfolio/projetos.html', {'projetos': projetos})
+
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = authenticate(request,
+                            username=username,
+                            password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('portfolio/home.html')
+        else:
+            return render(request, 'portfolio/login.html', {
+                'message': 'Credenciais invalidas'
+            })
+    return render(request, 'portfolio/login.html')
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('portfolio/home.html')

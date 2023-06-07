@@ -1,0 +1,33 @@
+{% extends 'portfolio/layout.html' %}
+{% load static %}
+{% block head %}
+<title>Login</title>
+<style>
+    .center {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 50vh;
+    }
+</style>
+{% endblock %}
+
+{% block main %}
+
+    <div class="center">
+        <h1>Login</h1>
+
+        {% if not request.user.is_authenticated %}
+            {{ message }}
+        {% endif %}
+
+        <form action="{% url 'portfolio:login' %}" method="POST">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="username">
+            <input type="password" name="password" placeholder="password">
+            <input type="submit" value="Login">
+        </form>
+    </div>
+
+{% endblock %}
