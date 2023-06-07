@@ -13,6 +13,7 @@
     </facet>
   </component>
   <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$" />
     <orderEntry type="jdk" jdkName="Pipenv (a21705067-django)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>

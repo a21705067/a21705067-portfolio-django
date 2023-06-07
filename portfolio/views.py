@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from .models import *
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -47,6 +49,19 @@ def projetos_page_view(request):
     return render(request, 'portfolio/projetos.html', {'projetos': projetos})
 
 
+def frontend_page_view(request):
+    return render(request, 'portfolio/frontend.html')
+
+
+def backend_page_view(request):
+    return render(request, 'portfolio/backend.html')
+
+
+@login_required
+def adiciona_conteudos_page_view(request):
+    return render(request, 'portfolio/adiciona_conteudos.html')
+
+
 def login_view(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -58,7 +73,7 @@ def login_view(request):
 
         if user is not None:
             login(request, user)
-            return redirect('portfolio/home.html')
+            return redirect('portfolio/adiciona_conteudos.html')
         else:
             return render(request, 'portfolio/login.html', {
                 'message': 'Credenciais invalidas'

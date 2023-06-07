@@ -2,11 +2,7 @@
 {% load static %}
 {% block head %}
 <title>Adiciona Conteudos</title>
-<style>
-  .tab {
-    display: none;
-  }
-</style>
+<link rel="stylesheet" href="{% static 'css/conteudos.css' %}">
 {% endblock %}
 
 {% block main %}
@@ -55,15 +51,14 @@
     </div>
   </div>
 
+  <script>
+      function openTab(tabName) {
+        let i, tabContent;
+        tabContent = document.getElementsByClassName("tab");
+        for (i = 0; i < tabContent.length; i++) {
+          tabContent[i].style.display = "none";
+        }
+        document.getElementById(tabName).style.display = "block";
+      }
+  </script>
 {% endblock %}
-
-<script>
-  function openTab(tabName) {
-    let i, tabContent;
-    tabContent = document.getElementsByClassName("tab");
-    for (i = 0; i < tabContent.length; i++) {
-      tabContent[i].style.display = "none";
-    }
-    document.getElementById(tabName).style.display = "block";
-  }
-</script>

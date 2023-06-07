@@ -26,25 +26,25 @@
             </ul>
           </li>
           <li><a href="{% url 'portfolio:projetos' %}">Projetos</a></li>
-<!--{#          <li><a>Programação Web</a>#}-->
-<!--{#            <ul>#}-->
-<!--{#                <li><a>Tecnologias Existentes</a>#}-->
-<!--{#                  <ul>#}-->
-<!--{#                    <li><a href="{% url 'portfolio:frontend' %}">Front-end</a></li>#}-->
-<!--{#                    <li><a href="{% url 'portfolio:backend' %}">Back-end</a></li>#}-->
-<!--{#                  </ul>#}-->
-<!--{#                </li>#}-->
-<!--{#                <li><a>Laboratórios</a>#}-->
-<!--{#                  <ul>#}-->
-<!--{#                    <li><a href="{% url 'http://a21705067.pythonanywhere.com/' %}" target="_blank">Lab 1</a></li>#}-->
-<!--{#                    <li><a href="{% url 'https://a21705067.pythonanywhere.com/a21705067-pw-lab2/' %}" target="_blank">Lab 2</a></li>#}-->
-<!--{#                    <li><a href="{% url 'https://a21705067.pythonanywhere.com/a21705067-pw-lab3/' %}" target="_blank">Lab 3</a></li>#}-->
-<!--{#                    <li><a href="{% url 'https://a21705067.pythonanywhere.com/a21705067-pw-lab4/' %}" target="_blank">Lab 4</a></li>#}-->
-<!--{#                </ul>#}-->
-<!--{#                </li>#}-->
-<!--{#                <li><a href="{% url 'portfolio:playground' %}">Javascript Playground</a></li>#}-->
-<!--{#            </ul>#}-->
-<!--{#          </li>#}-->
+          <li><a>Programação Web</a>
+            <ul>
+                <li><a>Tecnologias Existentes</a>
+                  <ul>
+                    <li><a href="{% url 'portfolio:frontend' %}">Front-end</a></li>
+                    <li><a href="{% url 'portfolio:backend' %}">Back-end</a></li>
+                  </ul>
+                </li>
+                <li><a>Laboratórios</a>
+                  <ul>
+                    <li><a href="https://a21705067.pythonanywhere.com/" target="_blank">Lab 1</a></li>
+                    <li><a href="https://a21705067.pythonanywhere.com/a21705067-pw-lab2/" target="_blank">Lab 2</a></li>
+                    <li><a href="https://a21705067.pythonanywhere.com/a21705067-pw-lab3/" target="_blank">Lab 3</a></li>
+                    <li><a href="https://a21705067.pythonanywhere.com/a21705067-pw-lab4/" target="_blank">Lab 4</a></li>
+                </ul>
+                </li>
+                <li><a href="https://a21705067.pythonanywhere.com/a21705067-pw-lab5/playground.html">Javascript Playground</a></li>
+            </ul>
+          </li>
           <li>
             {% if request.user.is_authenticated %}
             user: {{request.user}}
@@ -53,14 +53,15 @@
             <a href="{% url 'portfolio:login' %}">Login</a>
             {% endif %}
           </li>
-<!--{#         <div class="toggle-container">#}-->
-<!--{#          <label class="toggle">#}-->
-<!--{#            <input type="checkbox" id="mode-toggle">#}-->
-<!--{#            <span class="slider"></span>#}-->
-<!--{#            <span class="icon sun"><i class="fas fa-sun"></i></span>#}-->
-<!--{#            <span class="icon moon"><i class="fas fa-moon"></i></span>#}-->
-<!--{#          </label>#}-->
-<!--{#        </div>#}-->
+          <li><a href="{% url 'portfolio:adiciona_conteudos' %}">Adicionar conteudos</a></li>
+          <div class="toggle-container">
+            <label class="toggle">
+              <input type="checkbox" id="mode-toggle">
+              <span class="slider"></span>
+              <span class="icon sun"><i class="fas fa-sun"></i></span>
+              <span class="icon moon"><i class="fas fa-moon"></i></span>
+            </label>
+          </div>
         </ul>
       </nav>
     </header>
@@ -91,41 +92,42 @@
 
       <p>&copy;2023 Tiago Guerra | Universidade Lusófona <span class="logotipo"></span></p>
     </footer>
+
+  <script>
+    const modeSwitch = document.getElementById('mode-toggle');
+    {% load static %}
+    const linkElement = document.querySelector('link[href="{% static 'css/geral-light.css' %}"]');
+
+    // Verifica se há escolha armazenada no localStorage
+    const mode = localStorage.getItem('mode');
+    if (mode === 'dark') {
+      linkElement.setAttribute('href', 'css/geral-dark.css');
+      modeSwitch.checked = true;
+    }
+
+    modeSwitch.addEventListener('click', () => {
+      if (linkElement.getAttribute('href') === 'css/geral-light.css') {
+        linkElement.setAttribute('href', 'css/geral-dark.css');
+        localStorage.setItem('mode', 'dark');
+      } else {
+        linkElement.setAttribute('href', 'css/geral-light.css');
+        localStorage.setItem('mode', 'light');
+      }
+    });
+
+    window.addEventListener('load', function() {
+        let labLinks = document.querySelectorAll('#laboratorios a');
+        for (let i = 0; i < labLinks.length; i++) {
+        labLinks[i].setAttribute('target', '_blank');
+      }
+    });
+
+    window.addEventListener('load', function() {
+        let labLinks = document.querySelectorAll('#social-icon a');
+        for (let i = 0; i < labLinks.length; i++) {
+        labLinks[i].setAttribute('target', '_blank');
+      }
+    });
+  </script>
   </body>
-{#  <script>#}
-{#    const modeSwitch = document.getElementById('mode-toggle');#}
-{#    {% load static %}#}
-{#    const linkElement = document.querySelector('link[href="{% static 'css/geral-light.css' %}"]');#}
-{##}
-{#    // Verifica se há escolha armazenada no localStorage#}
-{#    const mode = localStorage.getItem('mode');#}
-{#    if (mode === 'dark') {#}
-{#      linkElement.setAttribute('href', 'css/geral-dark.css');#}
-{#      modeSwitch.checked = true;#}
-{#    }#}
-{##}
-{#    modeSwitch.addEventListener('click', () => {#}
-{#      if (linkElement.getAttribute('href') === 'css/geral-light.css') {#}
-{#        linkElement.setAttribute('href', 'css/geral-dark.css');#}
-{#        localStorage.setItem('mode', 'dark');#}
-{#      } else {#}
-{#        linkElement.setAttribute('href', 'css/geral-light.css');#}
-{#        localStorage.setItem('mode', 'light');#}
-{#      }#}
-{#    });#}
-{##}
-{#    window.addEventListener('load', function() {#}
-{#      var labLinks = document.querySelectorAll('#laboratorios a');#}
-{#      for (var i = 0; i < labLinks.length; i++) {#}
-{#        labLinks[i].setAttribute('target', '_blank');#}
-{#      }#}
-{#    });#}
-{##}
-{#    window.addEventListener('load', function() {#}
-{#      var labLinks = document.querySelectorAll('#social-icon a');#}
-{#      for (var i = 0; i < labLinks.length; i++) {#}
-{#        labLinks[i].setAttribute('target', '_blank');#}
-{#      }#}
-{#    });#}
-{#  </script>#}
 </html>
