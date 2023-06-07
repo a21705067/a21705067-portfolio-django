@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
+{% load static %}
   <head>
     <meta charset="UTF-8">
     <meta name="author" content="Tiago Guerra">
     <meta name="description" content="O meu portfolio">
-    {% load static %}
     <link rel="stylesheet" href="{% static 'css/geral-light.css' %}">
     {% block head %}
     {% endblock head %}
@@ -93,38 +93,37 @@
       <p>&copy;2023 Tiago Guerra | Universidade Lusófona <span class="logotipo"></span></p>
     </footer>
 
-  <script>
+ <script>
     const modeSwitch = document.getElementById('mode-toggle');
-    {% load static %}
     const linkElement = document.querySelector('link[href="{% static 'css/geral-light.css' %}"]');
 
     // Verifica se há escolha armazenada no localStorage
     const mode = localStorage.getItem('mode');
     if (mode === 'dark') {
-      linkElement.setAttribute('href', 'css/geral-dark.css');
+      linkElement.setAttribute('href', '{% static 'css/geral-dark.css' %}');
       modeSwitch.checked = true;
     }
 
     modeSwitch.addEventListener('click', () => {
-      if (linkElement.getAttribute('href') === 'css/geral-light.css') {
-        linkElement.setAttribute('href', 'css/geral-dark.css');
+      if (linkElement.getAttribute('href') === '{% static 'css/geral-light.css' %}') {
+        linkElement.setAttribute('href', '{% static 'css/geral-dark.css' %}');
         localStorage.setItem('mode', 'dark');
       } else {
-        linkElement.setAttribute('href', 'css/geral-light.css');
+        linkElement.setAttribute('href', '{% static 'css/geral-light.css' %}');
         localStorage.setItem('mode', 'light');
       }
     });
 
     window.addEventListener('load', function() {
-        let labLinks = document.querySelectorAll('#laboratorios a');
-        for (let i = 0; i < labLinks.length; i++) {
+      let labLinks = document.querySelectorAll('#laboratorios a');
+      for (let i = 0; i < labLinks.length; i++) {
         labLinks[i].setAttribute('target', '_blank');
       }
     });
 
     window.addEventListener('load', function() {
-        let labLinks = document.querySelectorAll('#social-icon a');
-        for (let i = 0; i < labLinks.length; i++) {
+      let labLinks = document.querySelectorAll('#social-icon a');
+      for (let i = 0; i < labLinks.length; i++) {
         labLinks[i].setAttribute('target', '_blank');
       }
     });

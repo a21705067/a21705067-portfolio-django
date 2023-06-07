@@ -1,4 +1,7 @@
-from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect
+from django.urls import reverse
+
 from .models import *
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -73,7 +76,7 @@ def login_view(request):
 
         if user is not None:
             login(request, user)
-            return redirect('portfolio/adiciona_conteudos.html')
+            return redirect('adiciona_conteudos')
         else:
             return render(request, 'portfolio/login.html', {
                 'message': 'Credenciais invalidas'
@@ -83,4 +86,4 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('portfolio/home.html')
+    return redirect('home')
