@@ -1,10 +1,27 @@
 {% extends 'portfolio/layout.html' %}
 {% load static %}
 {% block head %}
-<title>Hobbies</title>
-<link rel="stylesheet" href="{% static 'css/fronted.css' %}">
+<title>Frontend</title>
+<link rel="stylesheet" href="{% static 'css/frontend.css' %}">
 {% endblock %}
 
 {% block main %}
+    <h1>FrontEnd</h1>
 
+    <table class="tabela1ano">
+        <thead>
+            <tr class="header-tr">
+                <th>Linguagem</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                {% for item in frontend %}
+                  <td>{{ item.nome }}</td>
+                  <td>{{ item.descricao }}</td>
+                {% endfor %}
+            </tr>
+        </tbody>
+    </table>
 {% endblock %}

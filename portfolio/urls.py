@@ -14,8 +14,11 @@ urlpatterns = [
     path('projetos', views.projetos_page_view, name='projetos'),
     path('frontend', views.frontend_page_view, name='frontend'),
     path('backend', views.backend_page_view, name='backend'),
-    path('adiciona_conteudos', views.adiciona_conteudos_page_view, name='adiciona_conteudos'),
+    path('adiciona_conteudos/', views.adiciona_conteudos_page_view, name='adiciona_conteudos'),
     path('accounts/login/', auth_views.LoginView.as_view(template_name='portfolio/login.html'), name='login'),
     path('login/', views.login_view, name='login'),
-    path('logout', views.logout_view, name='logout')
+    path('logout', views.logout_view, name='logout'),
+    path('apaga/<str:tab_prefix>/<int:item_id>/', views.apaga_view, name='apaga'),
+    path('edita/<str:tab_prefix>/<int:item_id>/', views.edita_view, name='edita'),
+    path('adiciona/<str:tab_prefix>/', views.adiciona_view, name='adiciona'),
 ]

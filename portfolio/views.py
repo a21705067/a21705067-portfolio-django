@@ -1,8 +1,8 @@
-from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
 from .models import *
+from .forms import CadeiraForm, HobbyForm, ProjetoForm, FrontendForm, BackendForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
@@ -53,16 +53,34 @@ def projetos_page_view(request):
 
 
 def frontend_page_view(request):
-    return render(request, 'portfolio/frontend.html')
+    frontend = Frontend.objects.all()
+    return render(request, 'portfolio/frontend.html', {'frontend': frontend})
 
 
 def backend_page_view(request):
-    return render(request, 'portfolio/backend.html')
+    backend = Backend.objects.all()
+    return render(request, 'portfolio/backend.html', {'backend': backend})
 
 
 @login_required
 def adiciona_conteudos_page_view(request):
-    return render(request, 'portfolio/adiciona_conteudos.html')
+    cadeira = CadeiraForm(prefix='cadeira')
+    hobby = HobbyForm(prefix='hobby')
+    projeto = ProjetoForm(prefix='projeto')
+    frontend = FrontendForm(prefix='frontend')
+    backend = BackendForm(prefix='backend')
+
+    dados_cadeira = Cadeira.objects.all()
+    dados_hobby = Hobby.objects.all()
+    dados_projeto = Projeto.objects.all()
+    dados_frontend = Frontend.objects.all()
+    dados_backend = Backend.objects.all()
+
+    return render(request, 'portfolio/adiciona_conteudos.html',
+                  {'cadeira': cadeira, 'hobby': hobby, 'projeto': projeto,
+                   'frontend': frontend, 'backend': backend, 'dados_cadeira': dados_cadeira,
+                   'dados_hobby': dados_hobby, 'dados_projeto': dados_projeto, 'dados_frontend': dados_frontend,
+                   'dados_backend': dados_backend})
 
 
 def login_view(request):
@@ -76,7 +94,7 @@ def login_view(request):
 
         if user is not None:
             login(request, user)
-            return redirect('adiciona_conteudos')
+            return redirect('portfolio:adiciona_conteudos')
         else:
             return render(request, 'portfolio/login.html', {
                 'message': 'Credenciais invalidas'
@@ -86,4 +104,64 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('home')
+    return redirect('portfolio:home')
+
+
+def adiciona_view(request, tab_prefix):
+    print(tab_prefix)
+    if tab_prefix == 'cadeira':
+        form = CadeiraForm(request.POST or None)
+    elif tab_prefix == 'hobby':
+        print('form encontrado')
+        form = HobbyForm(request.POST or None)
+    elif tab_prefix == 'projeto':
+        form = ProjetoForm(request.POST or None)
+    elif tab_prefix == 'frontend':
+        form = FrontendForm(request.POST or None)
+    elif tab_prefix == 'backend':
+        form = BackendForm(request.POST or None)
+
+    if form.is_valid():
+        print('Entrou')
+        novo_objeto = form.save()
+        return redirect('portfolio:adiciona_conteudos')
+    else:
+        print('Formulário inválido:', form.errors)
+
+    context = {'form': form}
+    return render(request, 'portfolio/home.html', context)
+
+
+def edita_view(request, tab_prefix, item_id):
+    if tab_prefix == 'cadeira':
+        form = CadeiraForm(request.POST or None, instance=Cadeira.objects.get(id=item_id))
+    elif tab_prefix == 'hobby':
+        form = HobbyForm(request.POST or None, instance=Hobby.objects.get(id=item_id))
+    elif tab_prefix == 'projeto':
+        form = ProjetoForm(request.POST or None, instance=Projeto.objects.get(id=item_id))
+    elif tab_prefix == 'frontend':
+        form = FrontendForm(request.POST or None, instance=Frontend.objects.get(id=item_id))
+    elif tab_prefix == 'backend':
+        form = BackendForm(request.POST or None, instance=Backend.objects.get(id=item_id))
+
+    if form.is_valid():
+        form.save()
+        return redirect('portfolio:home')
+
+    context = {'form': form, 'tab_prefix': tab_prefix, 'item_id': item_id}
+    return render(request, 'portfolio/edita.html', context)
+
+
+def apaga_view(request, tab_prefix, item_id):
+    if tab_prefix == 'cadeira':
+        Cadeira.objects.get(id=item_id).delete()
+    elif tab_prefix == 'hobby':
+        Hobby.objects.get(id=item_id).delete()
+    elif tab_prefix == 'projeto':
+        Projeto.objects.get(id=item_id).delete()
+    elif tab_prefix == 'frontend':
+        Frontend.objects.get(id=item_id).delete()
+    elif tab_prefix == 'backend':
+        Backend.objects.get(id=item_id).delete()
+
+    return redirect('portfolio:adiciona_conteudos')

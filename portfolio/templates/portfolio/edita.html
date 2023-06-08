@@ -1,0 +1,21 @@
+{% extends 'portfolio/layout.html' %}
+{% load static %}
+{% block head %}
+<title>Editar Conteudo</title>
+<link rel="stylesheet" href="{% static 'css/conteudos.css' %}">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{% endblock %}
+
+{% block main %}
+
+    <h2>{{ tab_prefix }}</h2>
+
+    <form action="{% url 'portfolio:edita' tab_prefix=tab_prefix|lower item_id=item_id %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <a href="{% url 'portfolio:adiciona_conteudos' %}" role="button" class="btn btn-warning">Cancelar</a>
+        <input type="submit" value="Gravar" class="btn btn-success" >
+    </form>
+
+{% endblock %}

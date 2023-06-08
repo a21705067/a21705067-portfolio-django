@@ -84,7 +84,7 @@ main {
   nav ul ul li a {
     display: block;
     padding: 0.5em 1em;
-    color: black;
+    color: #28282B;
     font-size: 1em;
     text-decoration: none;
   }
@@ -146,7 +146,7 @@ main {
   
   .menu__link {
     font-size: 1.2rem;
-    color: black;
+    color: #28282B;
     margin: 0 10px;
     display: inline-block;
     transition: 0.5s;
@@ -160,7 +160,7 @@ main {
   }
   
   .footer p {
-    color: black;
+    color: #28282B;
     margin: 15px 0 10px 0;
     font-size: 1rem;
     font-weight: 300;

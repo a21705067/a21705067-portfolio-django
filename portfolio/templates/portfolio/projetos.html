@@ -12,14 +12,14 @@
     <table class="tabela1ano">
         <thead>
             <tr class="header-tr">
-                <th>Área</th>
+                <th>Nome</th>
                 <th>Descrição</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 {% for projeto in projetos %}
-              <td>{{ projeto.area }}</td>
+              <td>{{ projeto.nome }}</td>
               <td>{{ projeto.descricao | safe }}</td>
                 {% endfor %}
             </tr>
