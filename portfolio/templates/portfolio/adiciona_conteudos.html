@@ -37,7 +37,7 @@
 
         <div id="tab2" class="tab">
           <h2>Adicionar Hobby</h2>
-          <form action="{% url 'portfolio:adiciona' 'hobby' %}" method="post">
+          <form action="{% url 'portfolio:adiciona' 'hobby' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ hobby.as_table }}
             <button type="submit">Criar</button>

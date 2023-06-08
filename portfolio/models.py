@@ -30,14 +30,14 @@ class Cadeira(models.Model):
 
 class Hobby(models.Model):
     GAMING = 'GAMING'
-    LIVRO = 'LIVROS'
+    LIVROS = 'LIVROS'
     AUDIO = 'AUDIO'
     TV = 'TV'
     ANIME = 'ANIME'
 
     TIPO_HOBBY = [
         (GAMING, 'GAMING'),
-        (LIVRO, 'LIVROS'),
+        (LIVROS, 'LIVROS'),
         (AUDIO, 'AUDIO'),
         (TV, 'TV'),
         (ANIME, 'ANIME')
@@ -46,10 +46,9 @@ class Hobby(models.Model):
     categoria = models.CharField(
         max_length=15,
         choices=TIPO_HOBBY,
-        default=ANIME,
-        blank=True
+        default=ANIME
     )
-    descricao = models.CharField(max_length=100, blank=True)
+    descricao = models.CharField(max_length=100)
 
     def __str__(self):
         return self.categoria + " : " + self.descricao

@@ -45,6 +45,7 @@
                 <li><a href="https://a21705067.pythonanywhere.com/a21705067-pw-lab5/playground.html">Javascript Playground</a></li>
             </ul>
           </li>
+          <li><a href="{% url 'portfolio:adiciona_conteudos' %}">Adicionar conteudos</a></li>
           <li>
             {% if request.user.is_authenticated %}
             user: {{request.user}}
@@ -53,7 +54,6 @@
             <a href="{% url 'portfolio:login' %}">Login</a>
             {% endif %}
           </li>
-          <li><a href="{% url 'portfolio:adiciona_conteudos' %}">Adicionar conteudos</a></li>
           <div class="toggle-container">
             <label class="toggle">
               <input type="checkbox" id="mode-toggle">

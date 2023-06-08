@@ -9,15 +9,12 @@ class CadeiraForm(forms.ModelForm):
 
 
 class HobbyForm(forms.ModelForm):
+    categoria = forms.Select()
+    descricao = forms.CharField(required=True)
 
     class Meta:
         model = Hobby
-        fields = '__all__'
-
-    widgets = {
-        'categoria': forms.Select(attrs={'class': 'form-control'}),
-        'descricao': forms.CharField(widget=Hobby.descricao),
-    }
+        fields = ['categoria', 'descricao']
 
 
 class ProjetoForm(forms.ModelForm):

@@ -108,25 +108,32 @@ def logout_view(request):
 
 
 def adiciona_view(request, tab_prefix):
-    print(tab_prefix)
-    if tab_prefix == 'cadeira':
-        form = CadeiraForm(request.POST or None)
-    elif tab_prefix == 'hobby':
-        print('form encontrado')
-        form = HobbyForm(request.POST or None)
-    elif tab_prefix == 'projeto':
-        form = ProjetoForm(request.POST or None)
-    elif tab_prefix == 'frontend':
-        form = FrontendForm(request.POST or None)
-    elif tab_prefix == 'backend':
-        form = BackendForm(request.POST or None)
+    pedido = None
 
-    if form.is_valid():
-        print('Entrou')
-        novo_objeto = form.save()
-        return redirect('portfolio:adiciona_conteudos')
+    if tab_prefix == 'cadeira':
+        pedido = CadeiraForm
+    elif tab_prefix == 'hobby':
+        pedido = HobbyForm
+    elif tab_prefix == 'projeto':
+        pedido = ProjetoForm
+    elif tab_prefix == 'frontend':
+        pedido = FrontendForm
+    elif tab_prefix == 'backend':
+        pedido = BackendForm
+
+    form = pedido(request.POST or None)
+
+    if request.method == 'POST':
+        categoria = request.POST.get('hobby-categoria')
+        descricao = request.POST.get('hobby-descricao')
+        print(categoria + ": " + descricao)
+        if form.is_valid():
+            form.save()
+            return redirect('portfolio:adiciona_conteudos')
+        else:
+            print('Formulário inválido:', form.errors)
     else:
-        print('Formulário inválido:', form.errors)
+        form = pedido()
 
     context = {'form': form}
     return render(request, 'portfolio/home.html', context)
