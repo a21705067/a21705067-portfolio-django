@@ -108,33 +108,27 @@ def logout_view(request):
 
 
 def adiciona_view(request, tab_prefix):
-    pedido = None
+    # form = None
 
     if tab_prefix == 'cadeira':
-        pedido = CadeiraForm
+        form = CadeiraForm(request.POST)
     elif tab_prefix == 'hobby':
-        pedido = HobbyForm
+        form = HobbyForm(request.POST)
     elif tab_prefix == 'projeto':
-        pedido = ProjetoForm
+        form = ProjetoForm(request.POST)
     elif tab_prefix == 'frontend':
-        pedido = FrontendForm
+        form = FrontendForm(request.POST)
     elif tab_prefix == 'backend':
-        pedido = BackendForm
+        form = BackendForm(request.POST)
 
-    form = pedido(request.POST or None)
-    # print("Final - " + form.as_p())
-
-    if request.method == 'POST':
-        # categoria = request.POST.get('hobby-categoria')
-        # descricao = request.POST.get('hobby-descricao')
-        # print("POST - " + categoria + ": " + descricao)
-        if form.is_valid():
-            form.save()
-            return redirect('portfolio:adiciona_conteudos')
-        else:
-            print('Formulário inválido:', form.errors)
+    # categoria = request.POST.get('hobby-categoria')
+    # descricao = request.POST.get('hobby-descricao')
+    # print("POST - " + categoria + ": " + descricao)
+    if form.is_valid():
+        form.save()
+        return redirect('portfolio:adiciona_conteudos')
     else:
-        form = pedido()
+        print('Formulário inválido:', form.errors)
 
     context = {'form': form}
     return render(request, 'portfolio/home.html', context)
