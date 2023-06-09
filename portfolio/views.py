@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
-from .models import *
+from .models import Cadeira, Hobby, Projeto, Frontend, Backend
 from .forms import CadeiraForm, HobbyForm, ProjetoForm, FrontendForm, BackendForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -122,11 +122,12 @@ def adiciona_view(request, tab_prefix):
         pedido = BackendForm
 
     form = pedido(request.POST or None)
+    # print("Final - " + form.as_p())
 
     if request.method == 'POST':
-        categoria = request.POST.get('hobby-categoria')
-        descricao = request.POST.get('hobby-descricao')
-        print(categoria + ": " + descricao)
+        # categoria = request.POST.get('hobby-categoria')
+        # descricao = request.POST.get('hobby-descricao')
+        # print("POST - " + categoria + ": " + descricao)
         if form.is_valid():
             form.save()
             return redirect('portfolio:adiciona_conteudos')

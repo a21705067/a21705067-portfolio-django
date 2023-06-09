@@ -19,7 +19,7 @@
 
         <div id="tab1" class="tab">
           <h2>Adicionar Cadeira</h2>
-          <form action="{% url 'portfolio:adiciona' 'cadeira' %}" method="post">
+          <form action="{% url 'portfolio:adiciona' 'cadeira' %}" method="POST">
             {% csrf_token %}
             {{ cadeira.as_table }}
             <button type="submit">Criar</button>
@@ -37,7 +37,7 @@
 
         <div id="tab2" class="tab">
           <h2>Adicionar Hobby</h2>
-          <form action="{% url 'portfolio:adiciona' 'hobby' %}" method="post" enctype="multipart/form-data">
+          <form action="{% url 'portfolio:adiciona' 'hobby' %}" method="POST">
             {% csrf_token %}
             {{ hobby.as_table }}
             <button type="submit">Criar</button>
@@ -56,7 +56,7 @@
 
         <div id="tab3" class="tab">
           <h2>Adicionar Projeto</h2>
-          <form action="{% url 'portfolio:adiciona' 'projeto' %}" method="post">
+          <form action="{% url 'portfolio:adiciona' 'projeto' %}" method="POST">
             {% csrf_token %}
             {{ projeto.as_p }}
             <button type="submit">Criar</button>
