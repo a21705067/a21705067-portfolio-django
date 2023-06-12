@@ -63,7 +63,7 @@ class Projeto(models.Model):
 
 
 class Frontend(models.Model):
-    nome = models.CharField(max_length=75, blank=True)
+    nome = models.CharField(max_length=75)
     descricao = models.TextField(max_length=2000, blank=True)
 
     def __str__(self):
@@ -71,8 +71,33 @@ class Frontend(models.Model):
 
 
 class Backend(models.Model):
-    nome = models.CharField(max_length=75, blank=True)
+    nome = models.CharField(max_length=75)
     descricao = models.TextField(max_length=2000, blank=True)
+
+    def __str__(self):
+        return self.nome
+
+
+class Curriculo(models.Model):
+    ACADEMICO = 'ACADEMICO'
+    CERTIFICACAO = 'CERTIFICACAO'
+    SKILLS = 'SKILLS'
+
+    TIPO = [
+        (ACADEMICO, 'ACADEMICO'),
+        (CERTIFICACAO, 'CERTIFICACAO'),
+        (SKILLS, 'SKILLS')
+    ]
+
+    tipo = models.CharField(
+        max_length=15,
+        choices=TIPO,
+        default=ACADEMICO
+    )
+    nome = models.CharField(max_length=75)
+    dataInicio = models.DateField(default=None, blank=True)
+    dataFim = models.DateField(default=None, blank=True)
+    descricao = models.TextField(max_length=2000)
 
     def __str__(self):
         return self.nome

@@ -1,0 +1,38 @@
+{% extends 'portfolio/layout.html' %}
+{% load static %}
+{% block head %}
+    <title>Currículo</title>
+    <link rel="stylesheet" href="{% static 'css/conteudos.css' %}">
+{% endblock %}
+
+{% block main %}
+    <div class="tabbed-form">
+        <ul class="tab-menu">
+            <li><a href="#" onclick="openTab('tab1')">Académico</a></li>
+            <li><a href="#" onclick="openTab('tab2')">Certificações</a></li>
+            <li><a href="#" onclick="openTab('tab3')">Soft Skills</a></li>
+        </ul>
+
+        <div id="tab1" class="tab">
+            <h2>Académico</h2>
+            {% for item in academico %}
+
+            {% endfor %}
+        </div>
+
+        <div id="tab2" class="tab">
+            <h2>Certificações</h2>
+            {% for item in certificacoes %}
+
+            {% endfor %}
+        </div>
+
+        <div id="tab3" class="tab">
+            <h2>Soft Skills</h2>
+            {% for item in skills %}
+
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

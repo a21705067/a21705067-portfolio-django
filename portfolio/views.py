@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
-from .models import Cadeira, Hobby, Projeto, Frontend, Backend
+from .models import Cadeira, Hobby, Projeto, Frontend, Backend, Curriculo
 from .forms import CadeiraForm, HobbyForm, ProjetoForm, FrontendForm, BackendForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -60,6 +60,20 @@ def frontend_page_view(request):
 def backend_page_view(request):
     backend = Backend.objects.all()
     return render(request, 'portfolio/backend.html', {'backend': backend})
+
+
+def curriculo_page_view(request):
+    academico = Curriculo.objects.all().filter(tipo='ACADEMICO')
+    certificacoes = Curriculo.objects.all().filter(tipo='CERTIFICACAO')
+    skills = Curriculo.objects.all().filter(tipo='SKILLS')
+
+    context = {
+        'academico': academico,
+        'certificacoes': certificacoes,
+        'skills': skills
+    }
+
+    return render(request, 'portfolio/curriculo.html', context)
 
 
 @login_required

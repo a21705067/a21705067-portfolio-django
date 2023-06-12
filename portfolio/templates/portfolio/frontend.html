@@ -1,8 +1,8 @@
 {% extends 'portfolio/layout.html' %}
 {% load static %}
 {% block head %}
-<title>Frontend</title>
-<link rel="stylesheet" href="{% static 'css/frontend.css' %}">
+    <title>Frontend</title>
+    <link rel="stylesheet" href="{% static 'css/frontend.css' %}">
 {% endblock %}
 
 {% block main %}
@@ -10,18 +10,18 @@
 
     <table class="tabela1ano">
         <thead>
-            <tr class="header-tr">
-                <th>Linguagem</th>
-                <th>Descrição</th>
-            </tr>
+        <tr class="header-tr">
+            <th>Linguagem</th>
+            <th>Descrição</th>
+        </tr>
         </thead>
         <tbody>
+        {% for item in frontend %}
             <tr>
-                {% for item in frontend %}
-                  <td>{{ item.nome }}</td>
-                  <td>{{ item.descricao }}</td>
-                {% endfor %}
+                <td>{{ item.nome }}</td>
+                <td>{{ item.descricao }}</td>
             </tr>
+        {% endfor %}
         </tbody>
     </table>
 {% endblock %}

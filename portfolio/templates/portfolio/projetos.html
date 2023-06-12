@@ -6,7 +6,6 @@
 {% endblock %}
 
 {% block main %}
-  <main>
     <h1>Projetos</h1>
 
     <table class="tabela1ano">
@@ -17,13 +16,12 @@
             </tr>
         </thead>
         <tbody>
+        {% for projeto in projetos %}
             <tr>
-                {% for projeto in projetos %}
               <td>{{ projeto.nome }}</td>
               <td>{{ projeto.descricao | safe }}</td>
-                {% endfor %}
             </tr>
+        {% endfor %}
         </tbody>
     </table>
-  </main>
 {% endblock %}
