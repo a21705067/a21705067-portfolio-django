@@ -1,40 +1,143 @@
+/*.tab-menu {*/
+/*  display: flex;*/
+/*  justify-content: center;*/
+/*  align-items: center;*/
+/*  list-style-type: none;*/
+/*  padding: 0;*/
+/*  margin-bottom: 20px;*/
+/*}*/
+
+/*.tab-menu li {*/
+/*  !*display: inline-block;*!*/
+/*  margin-right: 10px;*/
+/*}*/
+
+/*.tab-menu li a {*/
+/*  display: block;*/
+/*  padding: 10px 20px;*/
+/*  background-color: grey;*/
+/*  text-decoration: none;*/
+/*  color: #333;*/
+/*  border-radius: 4px;*/
+/*}*/
+
+/*.tab-menu li a:hover {*/
+/*  background-color: #aaa;*/
+/*  color: #fff;*/
+/*}*/
+
+/*!* Tab Content *!*/
+/*.tab {*/
+/*  display: none;*/
+/*  padding: 20px;*/
+/*  !*background-color: #f9f9f9;*!*/
+/*  border-radius: 4px;*/
+/*}*/
+
+/*!* Active Tab *!*/
+/*.active-tab {*/
+/*  display: block;*/
+/*}*/
+
+/* Style the tabbed form container */
+.tabbed-form {
+  width: 100%;
+  margin: 20px auto;
+}
+
+/* Style the tab menu */
 .tab-menu {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   list-style-type: none;
   padding: 0;
-  margin-bottom: 20px;
+  margin: 0;
+  display: flex;
 }
 
 .tab-menu li {
-  /*display: inline-block;*/
-  margin-right: 10px;
+  flex: 1;
 }
 
+/* Style the tab links */
 .tab-menu li a {
   display: block;
-  padding: 10px 20px;
-  background-color: grey;
-  text-decoration: none;
+  text-align: center;
+  padding: 10px;
+  background-color: #f1f1f1;
   color: #333;
-  border-radius: 4px;
+  text-decoration: none;
+  border: 1px solid #ccc;
+  border-bottom: none;
 }
 
 .tab-menu li a:hover {
-  background-color: #aaa;
-  color: #fff;
+  background-color: #ddd;
 }
 
-/* Tab Content */
+/* Style the active tab link */
+.tab-menu li a.active {
+  background-color: #fff;
+  border-color: #ccc;
+}
+
+/* Hide all tab content sections except the active one */
 .tab {
   display: none;
-  padding: 20px;
-  /*background-color: #f9f9f9;*/
-  border-radius: 4px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 18px;
 }
 
-/* Active Tab */
-.active-tab {
+.tab.active {
   display: block;
+}
+
+/* Style the form elements and buttons */
+form {
+  margin-bottom: 20px;
+}
+
+form input[type="submit"] {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+form input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+/* Style the existing data list */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul li {
+  margin-bottom: 10px;
+}
+
+/* Style the edit and delete buttons */
+.btn {
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 3px;
+}
+
+.btn:hover {
+  background-color: #0069d9;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
 }

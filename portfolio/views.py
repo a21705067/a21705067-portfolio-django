@@ -1,10 +1,15 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
-from .models import Cadeira, Hobby, Projeto, Frontend, Backend, Curriculo
-from .forms import CadeiraForm, HobbyForm, ProjetoForm, FrontendForm, BackendForm
+from .models import *
+from .forms import *
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+
+# from bs4 import BeautifulSoup
+# import requests
+# import time, threading
+# import json
 
 
 # Create your views here.
@@ -63,11 +68,13 @@ def backend_page_view(request):
 
 
 def curriculo_page_view(request):
+    profissional = Curriculo.objects.all().filter(tipo='PROFISSIONAL')
     academico = Curriculo.objects.all().filter(tipo='ACADEMICO')
     certificacoes = Curriculo.objects.all().filter(tipo='CERTIFICACAO')
     skills = Curriculo.objects.all().filter(tipo='SKILLS')
 
     context = {
+        'profissional': profissional,
         'academico': academico,
         'certificacoes': certificacoes,
         'skills': skills
@@ -78,23 +85,28 @@ def curriculo_page_view(request):
 
 @login_required
 def adiciona_conteudos_page_view(request):
-    cadeira = CadeiraForm(prefix='cadeira')
-    hobby = HobbyForm(prefix='hobby')
-    projeto = ProjetoForm(prefix='projeto')
-    frontend = FrontendForm(prefix='frontend')
-    backend = BackendForm(prefix='backend')
+    cadeira = CadeiraForm()
+    hobby = HobbyForm()
+    projeto = ProjetoForm()
+    frontend = FrontendForm()
+    backend = BackendForm()
+    curriculo = CurriculoForm()
+    skill = SkillForm()
 
     dados_cadeira = Cadeira.objects.all()
     dados_hobby = Hobby.objects.all()
     dados_projeto = Projeto.objects.all()
     dados_frontend = Frontend.objects.all()
     dados_backend = Backend.objects.all()
+    dados_curriculo = Curriculo.objects.all()
+    dados_skills = Skill.objects.all()
 
     return render(request, 'portfolio/adiciona_conteudos.html',
                   {'cadeira': cadeira, 'hobby': hobby, 'projeto': projeto,
-                   'frontend': frontend, 'backend': backend, 'dados_cadeira': dados_cadeira,
-                   'dados_hobby': dados_hobby, 'dados_projeto': dados_projeto, 'dados_frontend': dados_frontend,
-                   'dados_backend': dados_backend})
+                   'frontend': frontend, 'backend': backend, 'curriculo': curriculo, 'skill': skill,
+                   'dados_cadeira': dados_cadeira, 'dados_hobby': dados_hobby, 'dados_projeto': dados_projeto,
+                   'dados_frontend': dados_frontend, 'dados_backend': dados_backend,
+                   'dados_curriculo': dados_curriculo, 'dados_skills': dados_skills})
 
 
 def login_view(request):
@@ -122,30 +134,27 @@ def logout_view(request):
 
 
 def adiciona_view(request, tab_prefix):
-    # form = None
+    if request.method == 'POST':
+        if tab_prefix == 'cadeira':
+            form = CadeiraForm(request.POST or None)
+        if tab_prefix == 'hobby':
+            form = HobbyForm(request.POST or None)
+        elif tab_prefix == 'projeto':
+            form = ProjetoForm(request.POST or None)
+        elif tab_prefix == 'frontend':
+            form = FrontendForm(request.POST or None)
+        elif tab_prefix == 'backend':
+            form = BackendForm(request.POST or None)
+        elif tab_prefix == 'curriculo':
+            form = CurriculoForm(request.POST or None)
 
-    if tab_prefix == 'cadeira':
-        form = CadeiraForm(request.POST)
-    elif tab_prefix == 'hobby':
-        form = HobbyForm(request.POST)
-    elif tab_prefix == 'projeto':
-        form = ProjetoForm(request.POST)
-    elif tab_prefix == 'frontend':
-        form = FrontendForm(request.POST)
-    elif tab_prefix == 'backend':
-        form = BackendForm(request.POST)
+        if form.is_valid():
+            form.save()
 
-    # categoria = request.POST.get('hobby-categoria')
-    # descricao = request.POST.get('hobby-descricao')
-    # print("POST - " + categoria + ": " + descricao)
-    if form.is_valid():
-        form.save()
-        return redirect('portfolio:adiciona_conteudos')
-    else:
-        print('Formulário inválido:', form.errors)
-
-    context = {'form': form}
-    return render(request, 'portfolio/home.html', context)
+            return redirect('portfolio:adiciona_conteudos')
+        else:
+            print('Formulário inválido:', form.errors)
+            return redirect('portfolio:adiciona_conteudos')
 
 
 def edita_view(request, tab_prefix, item_id):
@@ -159,6 +168,8 @@ def edita_view(request, tab_prefix, item_id):
         form = FrontendForm(request.POST or None, instance=Frontend.objects.get(id=item_id))
     elif tab_prefix == 'backend':
         form = BackendForm(request.POST or None, instance=Backend.objects.get(id=item_id))
+    elif tab_prefix == 'curriculo':
+        form = CurriculoForm(request.POST or None, instance=Curriculo.objects.get(id=item_id))
 
     if form.is_valid():
         form.save()
@@ -179,5 +190,41 @@ def apaga_view(request, tab_prefix, item_id):
         Frontend.objects.get(id=item_id).delete()
     elif tab_prefix == 'backend':
         Backend.objects.get(id=item_id).delete()
+    elif tab_prefix == 'curriculo':
+        Curriculo.objects.get(id=item_id).delete()
 
     return redirect('portfolio:adiciona_conteudos')
+
+
+# def metreologia():
+#     url = 'https://weather.com/pt-PT/clima/hoje/l/f0d93b551dcc5b4eeee581ecbbc1eec1306bf6c27ea78e3c64d846a3a34969a3'
+#     response = requests.get(url)
+#     soup = BeautifulSoup(response.content, 'html.parser')
+#
+#     dados = []
+#     localidade = soup.find('div', {'data-cq-observe': True})
+#
+#     cidade = localidade.find('h1').text
+#     temperatura_element = soup.find('span', {'data-testid': 'TemperatureValue'})
+#     temperatura_text = temperatura_element.text if temperatura_element else ''
+#     temperatura = float(temperatura_text) if temperatura_text.isdigit() else 0
+#
+#     descricao = localidade.find('div', {'data-testid': 'wxPhrase'}).text
+#     data_hora = datetime.now()
+#     dados.append({'cidade': cidade, 'temperatura': temperatura, 'descricao': descricao, 'data_hora': data_hora})
+#
+#     for dado in dados:
+#         novo_dado = DadosMeteorologia(cidade=dado['cidade'], temperatura=dado['temperatura'], descricao=dado['descricao'], data_hora=dado['data_hora'])
+#         novo_dado.save()
+#
+#
+# def scrap_metreologia():
+#     metreologia()
+#     intervalo_segundos = 24 * 60 * 60  # 24 horas
+#     while True:
+#         time.sleep(intervalo_segundos)
+#         metreologia()
+#
+#
+# t = threading.Thread(target=scrap_metreologia)
+# t.start()
