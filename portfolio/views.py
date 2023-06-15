@@ -6,10 +6,8 @@ from .forms import *
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
-# from bs4 import BeautifulSoup
-# import requests
-# import time, threading
-# import json
+from bs4 import BeautifulSoup
+import requests
 
 
 # Create your views here.
@@ -68,9 +66,9 @@ def backend_page_view(request):
 
 
 def curriculo_page_view(request):
-    profissional = Curriculo.objects.all().filter(tipo='PROFISSIONAL')
-    academico = Curriculo.objects.all().filter(tipo='ACADEMICO')
-    certificacoes = Curriculo.objects.all().filter(tipo='CERTIFICACAO')
+    profissional = Curriculo.objects.all().filter(tipo='PROFISSIONAL').order_by('-dataInicio')
+    academico = Curriculo.objects.all().filter(tipo='ACADEMICO').order_by('-dataInicio')
+    certificacoes = Curriculo.objects.all().filter(tipo='CERTIFICACAO').order_by('-dataInicio')
     skills = Skill.objects.all()
 
     context = {
@@ -202,35 +200,27 @@ def apaga_view(request, tab_prefix, item_id):
     return redirect('portfolio:adiciona_conteudos')
 
 
-# def metreologia():
-#     url = 'https://weather.com/pt-PT/clima/hoje/l/f0d93b551dcc5b4eeee581ecbbc1eec1306bf6c27ea78e3c64d846a3a34969a3'
-#     response = requests.get(url)
-#     soup = BeautifulSoup(response.content, 'html.parser')
-#
-#     dados = []
-#     localidade = soup.find('div', {'data-cq-observe': True})
-#
-#     cidade = localidade.find('h1').text
-#     temperatura_element = soup.find('span', {'data-testid': 'TemperatureValue'})
-#     temperatura_text = temperatura_element.text if temperatura_element else ''
-#     temperatura = float(temperatura_text) if temperatura_text.isdigit() else 0
-#
-#     descricao = localidade.find('div', {'data-testid': 'wxPhrase'}).text
-#     data_hora = datetime.now()
-#     dados.append({'cidade': cidade, 'temperatura': temperatura, 'descricao': descricao, 'data_hora': data_hora})
-#
-#     for dado in dados:
-#         novo_dado = DadosMeteorologia(cidade=dado['cidade'], temperatura=dado['temperatura'], descricao=dado['descricao'], data_hora=dado['data_hora'])
-#         novo_dado.save()
-#
-#
-# def scrap_metreologia():
-#     metreologia()
-#     intervalo_segundos = 24 * 60 * 60  # 24 horas
-#     while True:
-#         time.sleep(intervalo_segundos)
-#         metreologia()
-#
-#
-# t = threading.Thread(target=scrap_metreologia)
-# t.start()
+def get_html_content(location):
+    USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36"
+    LANGUAGE = "pt-PT,pt;q=0.5"
+    session = requests.Session()
+    session.headers['User-Agent'] = USER_AGENT
+    session.headers['Accept-Language'] = LANGUAGE
+    session.headers['Content-Language'] = LANGUAGE
+    location = location.replace(" ", "+")
+    html_content = session.get(f'https://www.bing.com/search?q=meteorologia++{location}').text
+    return html_content
+
+
+def meteorologia_page_view(request):
+    context = None
+    if 'location' in request.GET:
+        location = request.GET.get('location')
+        html_data = get_html_content(location)
+        soup = BeautifulSoup(html_data, "html.parser")
+        region = soup.find('span', attrs={'class': 'wtr_foreGround'}).text
+        daytime = soup.find('div', attrs={'class': 'wtr_dayTime'}).text
+        status = soup.find('div', attrs={'class': 'wtr_caption'}).text
+        temperature = soup.find('div', attrs={'class': 'wtr_currTemp'}).text
+        context = {'region': region, 'daytime': daytime, 'status': status, 'temperature': temperature}
+    return render(request, 'portfolio/meteorologia.html', context)

@@ -18,7 +18,7 @@ class CadeiraForm(forms.ModelForm):
                 'min': 1}),
             'etcs': forms.NumberInput(attrs={
                 'class': 'form-control',
-                'max': 7,
+                'max': 20,
                 'min': 3})
         }
 

@@ -1,27 +1,27 @@
 {% extends 'portfolio/layout.html' %}
 {% load static %}
 {% block head %}
-<title>Backend</title>
-<link rel="stylesheet" href="{% static 'css/backend.css' %}">
+    <title>Backend</title>
+    <link rel="stylesheet" href="{% static 'css/backend.css' %}">
 {% endblock %}
 
 {% block main %}
     <h1>Backend</h1>
 
-    <table class="tabela1ano">
+    <table class="tabelaOutros">
         <thead>
-            <tr class="header-tr">
-                <th>Linguagem</th>
-                <th>Descrição</th>
-            </tr>
+        <tr class="header-tr">
+            <th>Linguagem</th>
+            <th>Descrição</th>
+        </tr>
         </thead>
         <tbody>
+        {% for item in backend %}
             <tr>
-                {% for item in backend %}
-                  <td>{{ item.nome }}</td>
-                  <td>{{ item.descricao }}</td>
-                {% endfor %}
+                <td>{{ item.nome }}</td>
+                <td>{{ item.descricao }}</td>
             </tr>
+        {% endfor %}
         </tbody>
     </table>
 {% endblock %}

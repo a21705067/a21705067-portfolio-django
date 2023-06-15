@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="author" content="Tiago Guerra">
     <meta name="description" content="O meu portfolio">
-    <link rel="stylesheet" href="{% static 'css/geral-light.css' %}">
     {% block head %}
     {% endblock head %}
+    <link rel="stylesheet" href="{% static 'css/geral-light.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
@@ -46,6 +46,7 @@
                 <li><a href="https://a21705067.pythonanywhere.com/a21705067-pw-lab5/playground.html">Javascript Playground</a></li>
             </ul>
           </li>
+            <li><a href="{% url 'portfolio:meteorologia' %}">Meteorologia</a></li>
           <li><a href="{% url 'portfolio:adiciona_conteudos' %}">Adicionar conteudos</a></li>
           <li>
             {% if request.user.is_authenticated %}

@@ -31,7 +31,7 @@
           <ul>
             {% for dado in dados_cadeira %}
               <li>
-                  {{ dado.ano }} - {{ dado.semestre }} - {{ dado.disciplina }} - {{ dado.estado }}
+                  {{ dado.disciplina }} - {{ dado.estado }}
                   <a href="{% url 'portfolio:edita' 'cadeira' dado.id %}" class="btn btn-warning  btn-sm">Editar</a>
                   <a href="{% url 'portfolio:apaga' 'cadeira' dado.id %}" role="button" class="btn btn-danger">Apagar</a>
               </li>
@@ -91,7 +91,7 @@
           <ul>
             {% for dado in dados_frontend %}
               <li>
-                  {{ dado.nome }} - {{ dado.descricao }}
+                  {{ dado.nome }}
                   <a href="{% url 'portfolio:edita' 'frontend' dado.id %}" role="button" class="btn btn-warning  btn-sm">Editar</a>
                   <a href="{% url 'portfolio:apaga' 'frontend' dado.id %}" role="button" class="btn btn-danger">Apagar</a>
               </li>
@@ -111,7 +111,7 @@
           <ul>
             {% for dado in dados_backend %}
               <li>
-                  {{ dado.nome }} - {{ dado.descricao }}
+                  {{ dado.nome }}
                   <a href="{% url 'portfolio:edita' 'backend' dado.id %}" class="btn btn-warning  btn-sm">Editar</a>
                   <a href="{% url 'portfolio:apaga' 'backend' dado.id %}" role="button" class="btn btn-danger">Apagar</a>
               </li>
@@ -131,7 +131,7 @@
           <ul>
             {% for dado in dados_curriculo %}
               <li>
-                  {{ dado.tipo }} - {{ dado.nome }}
+                  {{ dado.tipo }} - {{ dado.nome }} - {{ dado.dataInicio }}
                   <a href="{% url 'portfolio:edita' 'curriculo' dado.id %}" class="btn btn-warning  btn-sm">Editar</a>
                   <a href="{% url 'portfolio:apaga' 'curriculo' dado.id %}" role="button" class="btn btn-danger">Apagar</a>
               </li>

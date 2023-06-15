@@ -13,9 +13,9 @@ class Cadeira(models.Model):
     TIPO_ESCOLHAS = (
         ('✅', 'APROVADO'),
         ('🛑', 'REPROVADO'),
-        ('DECORRER', 'EM CURSO')
+        ('EM CURSO', 'EM CURSO')
     )
-    estado = models.CharField(max_length=25, choices=TIPO_ESCOLHAS, default='DECORRER')
+    estado = models.CharField(max_length=25, choices=TIPO_ESCOLHAS, default='EM CURSO')
 
 
 def __str__(self):

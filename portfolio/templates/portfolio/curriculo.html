@@ -20,8 +20,10 @@
                 <h3>{{ item.nome }}</h3>
                 <div>
                     <p>Período: {{ item.dataInicio }} - {{ item.dataFim }}</p>
-                    <p>{{ item.descricao }}</p>
+                    <p>{{ item.descricao | safe }}</p>
+                    {% if item.pdfFile %}
                     <a target="_blank" href="{{ item.pdfFile.url }}">PDF</a>
+                    {% endif %}
                 </div>
             {% endfor %}
         </div>
@@ -32,8 +34,10 @@
                 <h3>{{ item.nome }}</h3>
                 <div>
                     <p>Período: {{ item.dataInicio }} - {{ item.dataFim }}</p>
-                    <p>{{ item.descricao }}</p>
+                    <p>{{ item.descricao | safe }}</p>
+                    {% if item.pdfFile %}
                     <a target="_blank" href="{{ item.pdfFile.url }}">PDF</a>
+                    {% endif %}
                 </div>
             {% endfor %}
         </div>
@@ -44,41 +48,50 @@
                 <h3>{{ item.nome }}</h3>
                 <div>
                     <p>Período: {{ item.dataInicio }} - {{ item.dataFim }}</p>
-                    <p>{{ item.descricao }}</p>
+                    <p>{{ item.descricao | safe }}</p>
+                    {% if item.pdfFile %}
                     <a target="_blank" href="{{ item.pdfFile.url }}">PDF</a>
+                    {% endif %}
                 </div>
             {% endfor %}
         </div>
 
         <div id="tab4" class="tab">
             <h2>Skills</h2>
-            {% for item in skills %}
-                <div class="skill-container">
-                    <img src="../static/images/{{ item.imagem }}" alt="{{ item.nome }}">
-                    {% if item.rating == 5 %}
-                        <img class="rating" src="{% static 'images/5_star_rating.svg' %}">
-                    {% elif item.rating == 4 %}
-                        <img class="rating" src="{% static 'images/4_star_rating.svg' %}">
-                    {% elif item.rating == 3 %}
-                        <img class="rating" src="{% static 'images/3_star_rating.svg' %}">
-                    {% elif item.rating == 2 %}
-                        <img class="rating" src="{% static 'images/2_star_rating.svg' %}">
-                    {% elif item.rating == 1 %}
-                        <img class="rating" src="{% static 'images/1_star_rating.svg' %}">
-                    {% endif %}
+            <div class="table-container">
+                <div class="table-row">
+                    {% for skill in skills %}
+                        <div class="table-cell">
+                            <div class="skill-container">
+                                <img src="../static/images/{{ skill.imagem }}" alt="{{ skill.nome }}">
+                                {% if skill.rating == 5 %}
+                                    <img class="rating" src="{% static 'images/5_star_rating.svg' %}">
+                                {% elif skill.rating == 4 %}
+                                    <img class="rating" src="{% static 'images/4_star_rating.svg' %}">
+                                {% elif skill.rating == 3 %}
+                                    <img class="rating" src="{% static 'images/3_star_rating.svg' %}">
+                                {% elif skill.rating == 2 %}
+                                    <img class="rating" src="{% static 'images/2_star_rating.svg' %}">
+                                {% elif skill.rating == 1 %}
+                                    <img class="rating" src="{% static 'images/1_star_rating.svg' %}">
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
-            {% endfor %}
+            </div>
         </div>
+
     </div>
 
     <script>
-      function openTab(tabName) {
-        let i, tabContent;
-        tabContent = document.getElementsByClassName("tab");
-        for (i = 0; i < tabContent.length; i++) {
-          tabContent[i].style.display = "none";
+        function openTab(tabName) {
+            let i, tabContent;
+            tabContent = document.getElementsByClassName("tab");
+            for (i = 0; i < tabContent.length; i++) {
+                tabContent[i].style.display = "none";
+            }
+            document.getElementById(tabName).style.display = "block";
         }
-        document.getElementById(tabName).style.display = "block";
-      }
     </script>
 {% endblock %}

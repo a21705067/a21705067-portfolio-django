@@ -266,6 +266,12 @@ main {
     color: black;
   }
 
+  .tabelaOutros {
+    background-color: white;
+    color: black;
+    width: 90%;
+  }
+
   form {
     background-color: white;
   }
