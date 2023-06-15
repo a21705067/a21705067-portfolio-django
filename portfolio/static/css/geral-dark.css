@@ -296,6 +296,15 @@ form {
     vertical-align: middle;
 }
 
+.list-group-item {
+    color: white;
+    background-color: #28282B;
+}
+
+.fa {
+    color: white;
+}
+
 @media screen and (max-width: 600px) {
     img {
         max-width: 25vh;
