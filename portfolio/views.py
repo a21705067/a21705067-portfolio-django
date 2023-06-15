@@ -222,5 +222,6 @@ def meteorologia_page_view(request):
         daytime = soup.find('div', attrs={'class': 'wtr_dayTime'}).text
         status = soup.find('div', attrs={'class': 'wtr_caption'}).text
         temperature = soup.find('div', attrs={'class': 'wtr_currTemp'}).text
-        context = {'region': region, 'daytime': daytime, 'status': status, 'temperature': temperature}
+        unit = soup.find('div', attrs={'class': 'wtr_currUnit'}).text
+        context = {'region': region, 'daytime': daytime, 'status': status, 'temperature': temperature, 'unit': unit}
     return render(request, 'portfolio/meteorologia.html', context)
