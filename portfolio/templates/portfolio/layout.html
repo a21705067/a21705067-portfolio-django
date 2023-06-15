@@ -47,7 +47,9 @@
             </ul>
           </li>
             <li><a href="{% url 'portfolio:meteorologia' %}">Meteorologia</a></li>
-          <li><a href="{% url 'portfolio:adiciona_conteudos' %}">Adicionar conteudos</a></li>
+            {% if request.user.is_authenticated %}
+            <li><a href="{% url 'portfolio:adiciona_conteudos' %}">Gestão Conteudos</a></li>
+            {% endif %}
           <li>
             {% if request.user.is_authenticated %}
             <a href="{% url 'portfolio:logout' %}">Logout</a>
