@@ -1,44 +1,3 @@
-/*.tab-menu {*/
-/*  display: flex;*/
-/*  justify-content: center;*/
-/*  align-items: center;*/
-/*  list-style-type: none;*/
-/*  padding: 0;*/
-/*  margin-bottom: 20px;*/
-/*}*/
-
-/*.tab-menu li {*/
-/*  !*display: inline-block;*!*/
-/*  margin-right: 10px;*/
-/*}*/
-
-/*.tab-menu li a {*/
-/*  display: block;*/
-/*  padding: 10px 20px;*/
-/*  background-color: grey;*/
-/*  text-decoration: none;*/
-/*  color: #333;*/
-/*  border-radius: 4px;*/
-/*}*/
-
-/*.tab-menu li a:hover {*/
-/*  background-color: #aaa;*/
-/*  color: #fff;*/
-/*}*/
-
-/*!* Tab Content *!*/
-/*.tab {*/
-/*  display: none;*/
-/*  padding: 20px;*/
-/*  !*background-color: #f9f9f9;*!*/
-/*  border-radius: 4px;*/
-/*}*/
-
-/*!* Active Tab *!*/
-/*.active-tab {*/
-/*  display: block;*/
-/*}*/
-
 /* Style the tabbed form container */
 .tabbed-form {
   width: 100%;
@@ -143,4 +102,15 @@ ul li {
 
 .btn-danger:hover {
   background-color: #c82333;
+}
+
+.skill-container {
+    text-align: center;
+}
+
+.skill-container img {
+    display: block;
+    margin: 0 auto;
+    width: 100px;
+    height: 100px;
 }

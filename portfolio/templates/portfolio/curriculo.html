@@ -2,7 +2,7 @@
 {% load static %}
 {% block head %}
     <title>Currículo</title>
-    <link rel="stylesheet" href="{% static 'css/conteudos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/curriculo.css' %}">
 {% endblock %}
 
 {% block main %}
@@ -18,29 +18,67 @@
             <h2>Profissional</h2>
             {% for item in profissional %}
                 <h3>{{ item.nome }}</h3>
+                <div>
+                    <p>Período: {{ item.dataInicio }} - {{ item.dataFim }}</p>
+                    <p>{{ item.descricao }}</p>
+                    <a target="_blank" href="{{ item.pdfFile.url }}">PDF</a>
+                </div>
             {% endfor %}
         </div>
 
         <div id="tab2" class="tab">
             <h2>Académico</h2>
             {% for item in academico %}
-
+                <h3>{{ item.nome }}</h3>
+                <div>
+                    <p>Período: {{ item.dataInicio }} - {{ item.dataFim }}</p>
+                    <p>{{ item.descricao }}</p>
+                    <a target="_blank" href="{{ item.pdfFile.url }}">PDF</a>
+                </div>
             {% endfor %}
         </div>
 
         <div id="tab3" class="tab">
             <h2>Certificações</h2>
             {% for item in certificacoes %}
-
+                <h3>{{ item.nome }}</h3>
+                <div>
+                    <p>Período: {{ item.dataInicio }} - {{ item.dataFim }}</p>
+                    <p>{{ item.descricao }}</p>
+                    <a target="_blank" href="{{ item.pdfFile.url }}">PDF</a>
+                </div>
             {% endfor %}
         </div>
 
         <div id="tab4" class="tab">
             <h2>Skills</h2>
             {% for item in skills %}
-
+                <div class="skill-container">
+                    <img src="../static/images/{{ item.imagem }}" alt="{{ item.nome }}">
+                    {% if item.rating == 5 %}
+                        <img class="rating" src="{% static 'images/5_star_rating.svg' %}">
+                    {% elif item.rating == 4 %}
+                        <img class="rating" src="{% static 'images/4_star_rating.svg' %}">
+                    {% elif item.rating == 3 %}
+                        <img class="rating" src="{% static 'images/3_star_rating.svg' %}">
+                    {% elif item.rating == 2 %}
+                        <img class="rating" src="{% static 'images/2_star_rating.svg' %}">
+                    {% elif item.rating == 1 %}
+                        <img class="rating" src="{% static 'images/1_star_rating.svg' %}">
+                    {% endif %}
+                </div>
             {% endfor %}
         </div>
     </div>
 
+    <script>
+      function openTab(tabName) {
+        let i, tabContent;
+        tabContent = document.getElementsByClassName("tab");
+        for (i = 0; i < tabContent.length; i++) {
+          tabContent[i].style.display = "none";
+        }
+        document.getElementById(tabName).style.display = "block";
+      }
+    </script>
 {% endblock %}

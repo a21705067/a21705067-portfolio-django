@@ -71,7 +71,7 @@ def curriculo_page_view(request):
     profissional = Curriculo.objects.all().filter(tipo='PROFISSIONAL')
     academico = Curriculo.objects.all().filter(tipo='ACADEMICO')
     certificacoes = Curriculo.objects.all().filter(tipo='CERTIFICACAO')
-    skills = Curriculo.objects.all().filter(tipo='SKILLS')
+    skills = Skill.objects.all()
 
     context = {
         'profissional': profissional,
@@ -105,8 +105,8 @@ def adiciona_conteudos_page_view(request):
                   {'cadeira': cadeira, 'hobby': hobby, 'projeto': projeto,
                    'frontend': frontend, 'backend': backend, 'curriculo': curriculo, 'skill': skill,
                    'dados_cadeira': dados_cadeira, 'dados_hobby': dados_hobby, 'dados_projeto': dados_projeto,
-                   'dados_frontend': dados_frontend, 'dados_backend': dados_backend,
-                   'dados_curriculo': dados_curriculo, 'dados_skills': dados_skills})
+                   'dados_frontend': dados_frontend, 'dados_backend': dados_backend, 'dados_curriculo': dados_curriculo,
+                   'dados_skills': dados_skills})
 
 
 def login_view(request):
@@ -137,7 +137,7 @@ def adiciona_view(request, tab_prefix):
     if request.method == 'POST':
         if tab_prefix == 'cadeira':
             form = CadeiraForm(request.POST or None)
-        if tab_prefix == 'hobby':
+        elif tab_prefix == 'hobby':
             form = HobbyForm(request.POST or None)
         elif tab_prefix == 'projeto':
             form = ProjetoForm(request.POST or None)
@@ -146,7 +146,9 @@ def adiciona_view(request, tab_prefix):
         elif tab_prefix == 'backend':
             form = BackendForm(request.POST or None)
         elif tab_prefix == 'curriculo':
-            form = CurriculoForm(request.POST or None)
+            form = CurriculoForm(request.POST, request.FILES)
+        elif tab_prefix == 'skill':
+            form = SkillForm(request.POST, request.FILES)
 
         if form.is_valid():
             form.save()
@@ -170,10 +172,12 @@ def edita_view(request, tab_prefix, item_id):
         form = BackendForm(request.POST or None, instance=Backend.objects.get(id=item_id))
     elif tab_prefix == 'curriculo':
         form = CurriculoForm(request.POST or None, instance=Curriculo.objects.get(id=item_id))
+    elif tab_prefix == 'skill':
+        form = SkillForm(request.POST or None, instance=Skill.objects.get(id=item_id))
 
     if form.is_valid():
         form.save()
-        return redirect('portfolio:home')
+        return redirect('portfolio:adiciona_conteudos')
 
     context = {'form': form, 'tab_prefix': tab_prefix, 'item_id': item_id}
     return render(request, 'portfolio/edita.html', context)
@@ -192,6 +196,8 @@ def apaga_view(request, tab_prefix, item_id):
         Backend.objects.get(id=item_id).delete()
     elif tab_prefix == 'curriculo':
         Curriculo.objects.get(id=item_id).delete()
+    elif tab_prefix == 'skill':
+        Skill.objects.get(id=item_id).delete()
 
     return redirect('portfolio:adiciona_conteudos')
 

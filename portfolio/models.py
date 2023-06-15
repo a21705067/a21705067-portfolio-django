@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.staticfiles.storage import staticfiles_storage
 from django import forms
 from django.core.validators import MinValueValidator, MaxValueValidator
 
@@ -85,6 +86,7 @@ class Curriculo(models.Model):
 class Skill(models.Model):
     nome = models.CharField(max_length=75)
     rating = models.IntegerField(default=1)
+    imagem = models.ImageField(upload_to='')
 
     def __str__(self):
         return self.nome
