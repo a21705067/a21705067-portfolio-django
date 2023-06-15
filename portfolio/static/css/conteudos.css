@@ -74,6 +74,7 @@ form input[type="submit"] {
   color: #fff;
   border: none;
   cursor: pointer;
+  border-radius: 3px;
 }
 
 form input[type="submit"]:hover {
@@ -111,3 +112,30 @@ ul li {
 .btn-danger:hover {
   background-color: #c82333;
 }
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.grid-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.grid-item:last-child {
+  margin-bottom: 20px;
+}
+
+.data-item {
+  margin-bottom: 5px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+}
+

@@ -1,173 +1,214 @@
 {% extends 'portfolio/layout.html' %}
 {% load static %}
 {% block head %}
-<title>Adiciona Conteudos</title>
-<link rel="stylesheet" href="{% static 'css/conteudos.css' %}">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Adiciona Conteudos</title>
+    <link rel="stylesheet" href="{% static 'css/conteudos.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 {% endblock %}
 
 {% block main %}
 
     <div class="tabbed-form">
         <ul class="tab-menu">
-          <li><a href="#" onclick="openTab('tab1')">Licenciatura</a></li>
-          <li><a href="#" onclick="openTab('tab2')">Hobby</a></li>
-          <li><a href="#" onclick="openTab('tab3')">Projeto</a></li>
-          <li><a href="#" onclick="openTab('tab4')">Front-end</a></li>
-          <li><a href="#" onclick="openTab('tab5')">Back-end</a></li>
-          <li><a href="#" onclick="openTab('tab6')">Currículo</a></li>
-          <li><a href="#" onclick="openTab('tab7')">Skills</a></li>
+            <li><a href="#" onclick="openTab('tab1')">Licenciatura</a></li>
+            <li><a href="#" onclick="openTab('tab2')">Hobby</a></li>
+            <li><a href="#" onclick="openTab('tab3')">Projeto</a></li>
+            <li><a href="#" onclick="openTab('tab4')">Front-end</a></li>
+            <li><a href="#" onclick="openTab('tab5')">Back-end</a></li>
+            <li><a href="#" onclick="openTab('tab6')">Currículo</a></li>
+            <li><a href="#" onclick="openTab('tab7')">Skills</a></li>
         </ul>
 
         <div id="tab1" class="tab">
-          <h2>Adicionar Cadeira</h2>
-          <form action="{% url 'portfolio:adiciona' 'cadeira' %}" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ cadeira.as_table }}
-            <input type="submit" value="Criar">
-          </form>
+            <h2>Adicionar Cadeira</h2>
+            <form action="{% url 'portfolio:adiciona' 'cadeira' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ cadeira.as_table }}
+                <input type="submit" value="Criar">
+            </form>
 
-          <h3>Dados Existentes</h3>
-          <ul>
-            {% for dado in dados_cadeira %}
-              <li>
-                  {{ dado.disciplina }} - {{ dado.estado }}
-                  <a href="{% url 'portfolio:edita' 'cadeira' dado.id %}" class="btn btn-warning  btn-sm">Editar</a>
-                  <a href="{% url 'portfolio:apaga' 'cadeira' dado.id %}" role="button" class="btn btn-danger">Apagar</a>
-              </li>
-            {% endfor %}
-          </ul>
+            <h3>Dados Existentes</h3>
+            <div class="grid-container">
+                {% for dado in dados_cadeira %}
+                    <div class="grid-item">
+                        <div class="data-item">
+                            {{ dado.disciplina }} - {{ dado.estado }}
+                        </div>
+                        <div class="button-group">
+                            <a href="{% url 'portfolio:edita' 'cadeira' dado.id %}" class="btn btn-warning btn-sm">Editar</a>
+                            <a href="{% url 'portfolio:apaga' 'cadeira' dado.id %}" role="button"
+                               class="btn btn-danger">Apagar</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
 
         <div id="tab2" class="tab">
-          <h2>Adicionar Hobby</h2>
-          <form action="{% url 'portfolio:adiciona' 'hobby' %}" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ hobby.as_table }}
-            <input type="submit" value="Criar">
-          </form>
+            <h2>Adicionar Hobby</h2>
+            <form action="{% url 'portfolio:adiciona' 'hobby' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ hobby.as_table }}
+                <input type="submit" value="Criar">
+            </form>
 
-          <h3>Dados Existentes</h3>
-          <ul>
-            {% for dado in dados_hobby %}
-              <li>
-                  {{ dado.categoria }} - {{ dado.descricao }}
-                  <a href="{% url 'portfolio:edita' 'hobby' dado.id %}" class="btn btn-warning  btn-sm">Editar</a>
-                  <a href="{% url 'portfolio:apaga' 'hobby' dado.id %}" role="button" class="btn btn-danger">Apagar</a>
-              </li>
-            {% endfor %}
-          </ul>
+            <h3>Dados Existentes</h3>
+            <div class="grid-container">
+                {% for dado in dados_hobby %}
+                    <div class="grid-item">
+                        <div class="data-item">
+                            {{ dado.categoria }} - {{ dado.descricao }}
+                        </div>
+                        <div class="button-group">
+                            <a href="{% url 'portfolio:edita' 'hobby' dado.id %}"
+                               class="btn btn-warning btn-sm">Editar</a>
+                            <a href="{% url 'portfolio:apaga' 'hobby' dado.id %}" role="button"
+                               class="btn btn-danger">Apagar</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
 
         <div id="tab3" class="tab">
-          <h2>Adicionar Projeto</h2>
-          <form action="{% url 'portfolio:adiciona' 'projeto' %}" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ projeto.as_p }}
-            <input type="submit" value="Criar">
-          </form>
+            <h2>Adicionar Projeto</h2>
+            <form action="{% url 'portfolio:adiciona' 'projeto' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ projeto.as_p }}
+                <input type="submit" value="Criar">
+            </form>
 
-          <h3>Dados Existentes</h3>
-          <ul>
-            {% for dado in dados_projeto %}
-              <li>
-                  {{ dado.nome }}
-                  <a href="{% url 'portfolio:edita' 'projeto' dado.id %}" class="btn btn-warning  btn-sm">Editar</a>
-                  <a href="{% url 'portfolio:apaga' 'projeto' dado.id %}" role="button" class="btn btn-danger">Apagar</a>
-              </li>
-            {% endfor %}
-          </ul>
+            <h3>Dados Existentes</h3>
+            <div class="grid-container">
+                {% for dado in dados_projeto %}
+                    <div class="grid-item">
+                        <div class="data-item">
+                            {{ dado.nome }}
+                        </div>
+                        <div class="button-group">
+                            <a href="{% url 'portfolio:edita' 'projeto' dado.id %}"
+                               class="btn btn-warning btn-sm">Editar</a>
+                            <a href="{% url 'portfolio:apaga' 'projeto' dado.id %}" role="button"
+                               class="btn btn-danger">Apagar</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
 
         <div id="tab4" class="tab">
-          <h2>Adicionar Front-end</h2>
-          <form action="{% url 'portfolio:adiciona' 'frontend' %}" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ frontend.as_p }}
-            <input type="submit" value="Criar">
-          </form>
+            <h2>Adicionar Front-end</h2>
+            <form action="{% url 'portfolio:adiciona' 'frontend' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ frontend.as_p }}
+                <input type="submit" value="Criar">
+            </form>
 
-          <h3>Dados Existentes</h3>
-          <ul>
-            {% for dado in dados_frontend %}
-              <li>
-                  {{ dado.nome }}
-                  <a href="{% url 'portfolio:edita' 'frontend' dado.id %}" role="button" class="btn btn-warning  btn-sm">Editar</a>
-                  <a href="{% url 'portfolio:apaga' 'frontend' dado.id %}" role="button" class="btn btn-danger">Apagar</a>
-              </li>
-            {% endfor %}
-          </ul>
+            <h3>Dados Existentes</h3>
+            <div class="grid-container">
+                {% for dado in dados_frontend %}
+                    <div class="grid-item">
+                        <div class="data-item">
+                            {{ dado.nome }}
+                        </div>
+                        <div class="button-group">
+                            <a href="{% url 'portfolio:edita' 'frontend' dado.id %}"
+                               class="btn btn-warning btn-sm">Editar</a>
+                            <a href="{% url 'portfolio:apaga' 'frontend' dado.id %}" role="button"
+                               class="btn btn-danger">Apagar</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
 
         <div id="tab5" class="tab">
-          <h2>Adicionar Back-end</h2>
-          <form action="{% url 'portfolio:adiciona' 'backend' %}" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ backend.as_p }}
-            <input type="submit" value="Criar">
-          </form>
+            <h2>Adicionar Back-end</h2>
+            <form action="{% url 'portfolio:adiciona' 'backend' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ backend.as_p }}
+                <input type="submit" value="Criar">
+            </form>
 
-          <h3>Dados Existentes</h3>
-          <ul>
-            {% for dado in dados_backend %}
-              <li>
-                  {{ dado.nome }}
-                  <a href="{% url 'portfolio:edita' 'backend' dado.id %}" class="btn btn-warning  btn-sm">Editar</a>
-                  <a href="{% url 'portfolio:apaga' 'backend' dado.id %}" role="button" class="btn btn-danger">Apagar</a>
-              </li>
-            {% endfor %}
-          </ul>
+            <h3>Dados Existentes</h3>
+            <div class="grid-container">
+                {% for dado in dados_backend %}
+                    <div class="grid-item">
+                        <div class="data-item">
+                            {{ dado.nome }}
+                        </div>
+                        <div class="button-group">
+                            <a href="{% url 'portfolio:edita' 'backend' dado.id %}"
+                               class="btn btn-warning btn-sm">Editar</a>
+                            <a href="{% url 'portfolio:apaga' 'backend' dado.id %}" role="button"
+                               class="btn btn-danger">Apagar</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
 
         <div id="tab6" class="tab">
-          <h2>Adicionar Curriculo</h2>
-          <form action="{% url 'portfolio:adiciona' 'curriculo' %}" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ curriculo.as_p }}
-            <input type="submit" value="Criar">
-          </form>
+            <h2>Adicionar Curriculo</h2>
+            <form action="{% url 'portfolio:adiciona' 'curriculo' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ curriculo.as_p }}
+                <input type="submit" value="Criar">
+            </form>
 
-          <h3>Dados Existentes</h3>
-          <ul>
-            {% for dado in dados_curriculo %}
-              <li>
-                  {{ dado.tipo }} - {{ dado.nome }} - {{ dado.dataInicio }}
-                  <a href="{% url 'portfolio:edita' 'curriculo' dado.id %}" class="btn btn-warning  btn-sm">Editar</a>
-                  <a href="{% url 'portfolio:apaga' 'curriculo' dado.id %}" role="button" class="btn btn-danger">Apagar</a>
-              </li>
-            {% endfor %}
-          </ul>
+            <h3>Dados Existentes</h3>
+            <div class="grid-container">
+                {% for dado in dados_curriculo %}
+                    <div class="grid-item">
+                        <div class="data-item">
+                            {{ dado.tipo }} - {{ dado.nome }} - {{ dado.dataInicio }}
+                        </div>
+                        <div class="button-group">
+                            <a href="{% url 'portfolio:edita' 'curriculo' dado.id %}"
+                               class="btn btn-warning btn-sm">Editar</a>
+                            <a href="{% url 'portfolio:apaga' 'curriculo' dado.id %}" role="button"
+                               class="btn btn-danger">Apagar</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
 
         <div id="tab7" class="tab">
-          <h2>Adicionar Skill</h2>
-          <form action="{% url 'portfolio:adiciona' 'skill' %}" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ skill.as_p }}
-            <input type="submit" value="Criar">
-          </form>
+            <h2>Adicionar Skill</h2>
+            <form action="{% url 'portfolio:adiciona' 'skill' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ skill.as_p }}
+                <input type="submit" value="Criar">
+            </form>
 
-          <h3>Dados Existentes</h3>
-          <ul>
-            {% for dado in dados_skills %}
-              <li>
-                  {{ dado.nome }}
-                  <a href="{% url 'portfolio:edita' 'skill' dado.id %}" class="btn btn-warning  btn-sm">Editar</a>
-                  <a href="{% url 'portfolio:apaga' 'skill' dado.id %}" role="button" class="btn btn-danger">Apagar</a>
-              </li>
-            {% endfor %}
-          </ul>
+            <h3>Dados Existentes</h3>
+            <div class="grid-container">
+                {% for dado in dados_skills %}
+                    <div class="grid-item">
+                        <div class="data-item">
+                            {{ dado.nome }} - {{ dado.rating }}
+                        </div>
+                        <div class="button-group">
+                            <a href="{% url 'portfolio:edita' 'skills' dado.id %}"
+                               class="btn btn-warning btn-sm">Editar</a>
+                            <a href="{% url 'portfolio:apaga' 'skills' dado.id %}" role="button"
+                               class="btn btn-danger">Apagar</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 
-  <script>
-      function openTab(tabName) {
-        let i, tabContent;
-        tabContent = document.getElementsByClassName("tab");
-        for (i = 0; i < tabContent.length; i++) {
-          tabContent[i].style.display = "none";
+    <script>
+        function openTab(tabName) {
+            let i, tabContent;
+            tabContent = document.getElementsByClassName("tab");
+            for (i = 0; i < tabContent.length; i++) {
+                tabContent[i].style.display = "none";
+            }
+            document.getElementById(tabName).style.display = "block";
         }
-        document.getElementById(tabName).style.display = "block";
-      }
-  </script>
+    </script>
 {% endblock %}
