@@ -121,10 +121,11 @@ nav ul li > a:only-child:after {
 .hamburger {
     display: none; /* Hide by default for larger screens */
     cursor: pointer;
-    position: absolute;
+    position: fixed;
     top: 20px;
     right: 20px;
     z-index: 999;
+    background: transparent;
 }
 
 .hamburger span {
@@ -133,7 +134,7 @@ nav ul li > a:only-child:after {
     height: 4px;
     margin-bottom: 5px;
     position: relative;
-    background: black;
+    background: white;
     border-radius: 3px;
     z-index: 1;
 }
@@ -321,7 +322,17 @@ form {
 
     body {
         flex-direction: column;
-        min-height: 100vh;
+        min-height: 80vh;
+    }
+
+    header {
+        position: sticky;
+        top: 0;
+        z-index: 999;
+    }
+
+    main {
+        margin-top: 10vh;
     }
 
     .footer {
