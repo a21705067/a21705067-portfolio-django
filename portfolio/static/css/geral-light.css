@@ -118,6 +118,27 @@ nav ul li > a:only-child:after {
     margin-top: 80vh;
 }
 
+.hamburger {
+    display: none; /* Hide by default for larger screens */
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 999;
+}
+
+.hamburger span {
+    display: block;
+    width: 30px;
+    height: 4px;
+    margin-bottom: 5px;
+    position: relative;
+    background: black;
+    border-radius: 3px;
+    z-index: 1;
+}
+
+
 .social-icon,
 .menu {
     position: relative;
@@ -292,18 +313,60 @@ form {
 }
 
 
-@media screen and (max-width: 600px) {
-    img {
-        max-width: 25vh;
-        max-height: 25vh;
+@media (max-width: 604px) {
+
+    html, body {
+        height: auto; /* Reset height to auto */
     }
 
-    p {
-        font-size: 0.8em;
+    body {
+        flex-direction: column;
+        min-height: 100vh;
     }
 
     .footer {
-        margin-top: 90vh;
+        position: sticky;
+        bottom: 0;
     }
 
+    .logotipo {
+        width: 50px;
+        height: 40px;
+    }
+
+    /* Show hamburger menu for smaller screens */
+    .hamburger {
+        display: block;
+    }
+
+    nav ul {
+        display: none; /* Hide the navigation menu by default */
+        position: absolute;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+        z-index: 999;
+    }
+
+    nav ul li {
+        width: 100%;
+        text-align: center;
+        background-color: white;
+    }
+
+    nav ul li a {
+        display: block;
+        padding: 1em;
+        color: black;
+        font-size: 1.1em;
+        font-weight: bold;
+        text-decoration: none;
+        transition: color 0.3s ease-out;
+    }
+
+    .nav-active {
+        display: block !important; /* Override the display: none */
+    }
 }
